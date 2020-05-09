@@ -1,0 +1,2 @@
+# curriculum_assessment
+高校课程考核管理系统的服务端
