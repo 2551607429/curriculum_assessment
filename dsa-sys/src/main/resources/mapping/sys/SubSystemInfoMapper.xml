@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.sys.dao.SubSystemInfoDao" >
+    <sql id="Base_Column_List">
+        ID AS id, SubSystemID, vc_Name, i_Type AS type, i_Visible AS visible, i_Sort AS sort, i_IsEnable AS isEnable, i_Flag AS flag, vc_Memo
+    </sql>
+
+    <sql id="DevType_Column_List">
+        ID AS id, DevTypeID, vc_Name, vc_Icon, i_Sort AS sort, i_IsEnable AS isEnable, i_Flag AS flag, vc_Memo
+    </sql>
+
+    <insert id="insert" parameterType="com.dsa.sys.model.SubSystemInfo" >
+        insert into m_subsysteminfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="subSystemId != null" >
+                SubSystemID,
+            </if>
+            <if test="vcName != null" >
+                vc_Name,
+            </if>
+            <if test="type != null" >
+                i_Type,
+            </if>
+            <if test="visible != null" >
+                i_Visible,
+            </if>
+            <if test="sort != null" >
+                i_Sort,
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable,
+            </if>
+            <if test="flag != null" >
+                i_Flag,
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="subSystemId != null" >
+                #{subSystemId},
+            </if>
+            <if test="vcName != null" >
+                #{vcName},
+            </if>
+            <if test="type != null" >
+                #{type},
+            </if>
+            <if test="visible != null" >
+                #{visible},
+            </if>
+            <if test="sort != null" >
+                #{sort},
+            </if>
+            <if test="isEnable != null" >
+                #{isEnable},
+            </if>
+            <if test="flag != null" >
+                #{flag},
+            </if>
+            <if test="vcMemo != null" >
+                #{vcMemo},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="linkSubSystemDevTypes" parameterType="list">
+        insert into m_subsystemdevtype (SubSystemId, DevTypeId, i_Sort, i_Flag, vc_Memo) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.subSystemId},
+            #{item.devTypeId},
+            #{item.sort},
+            #{item.flag},
+            #{item.vcMemo})
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.dsa.sys.model.SubSystemInfo">
+        update m_subsysteminfo
+        <set>
+            <if test="vcName != null" >
+                vc_Name = #{vcName},
+            </if>
+            <if test="type != null" >
+                i_Type = #{type},
+            </if>
+            <if test="visible != null" >
+                i_Visible = #{visible},
+            </if>
+            <if test="sort != null" >
+                i_Sort = #{sort},
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable = #{isEnable},
+            </if>
+            <if test="flag != null" >
+                i_Flag = #{flag},
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo = #{vcMemo},
+            </if>
+        </set>
+        where SubSystemID = #{subSystemId}
+    </update>
+
+    <delete id="delById">
+        DELETE FROM m_subsysteminfo m WHERE m.SubSystemID = #{subSystemId}
+    </delete>
+
+    <delete id="unLinkAllDevType">
+        DELETE FROM m_subsystemdevtype m WHERE m.SubSystemID = #{subSystemId}
+    </delete>
+
+    <select id="get" resultType="com.dsa.sys.model.SubSystemInfo">
+        SELECT
+          <include refid="Base_Column_List" />
+        FROM
+          m_subsysteminfo m
+        WHERE
+          m.SubSystemID = #{subSystemId}
+    </select>
+
+    <select id="getMaxSubSystemId" resultType="java.lang.Integer">
+        SELECT
+            MAX(m.SubSystemID)
+        FROM
+          m_subsysteminfo m
+    </select>
+
+    <select id="find" resultType="com.dsa.sys.model.SubSystemInfo">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            `m_subsysteminfo` m
+        WHERE
+            1=1
+    </select>
+
+    <select id="findDevTypes" resultType="com.dsa.sys.model.DevType">
+        SELECT
+            <include refid="DevType_Column_List" />
+        FROM
+            m_devtype d
+        where d.DevTypeID in (SELECT
+            b.DevTypeID
+        FROM
+            m_subsysteminfo a
+        JOIN m_subsystemdevtype b
+        ON a.SubSystemID = b.SubSystemID
+        WHERE a.SubSystemID = #{subSystemId})
+    </select>
+
+</mapper>

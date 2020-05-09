@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.sys.dao.AchievementMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.sys.model.Achievement" >
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <id column="exam_id" property="examId" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    student_id, exam_id, score
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.sys.model.AchievementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from achievement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zx.sys.model.AchievementKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from achievement
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and exam_id = #{examId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zx.sys.model.AchievementKey" >
+    delete from achievement
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and exam_id = #{examId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zx.sys.model.AchievementExample" >
+    delete from achievement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zx.sys.model.Achievement" >
+    insert into achievement (student_id, exam_id, score
+      )
+    values (#{studentId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}, #{score,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.sys.model.Achievement" >
+    insert into achievement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="examId != null" >
+        exam_id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="examId != null" >
+        #{examId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.sys.model.AchievementExample" resultType="java.lang.Integer" >
+    select count(*) from achievement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update achievement
+    <set >
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examId != null" >
+        exam_id = #{record.examId,jdbcType=INTEGER},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update achievement
+    set student_id = #{record.studentId,jdbcType=INTEGER},
+      exam_id = #{record.examId,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.sys.model.Achievement" >
+    update achievement
+    <set >
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.sys.model.Achievement" >
+    update achievement
+    set score = #{score,jdbcType=REAL}
+    where student_id = #{studentId,jdbcType=INTEGER}
+      and exam_id = #{examId,jdbcType=INTEGER}
+  </update>
+</mapper>

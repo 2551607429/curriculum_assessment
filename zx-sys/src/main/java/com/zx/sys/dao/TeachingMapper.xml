@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.sys.dao.TeachingMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.sys.model.Teaching" >
+    <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <id column="curriculum_id" property="curriculumId" jdbcType="INTEGER" />
+    <id column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    teacher_id, curriculum_id, class_id, start_time, end_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.sys.model.TeachingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teaching
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zx.sys.model.TeachingKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from teaching
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and curriculum_id = #{curriculumId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zx.sys.model.TeachingKey" >
+    delete from teaching
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and curriculum_id = #{curriculumId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zx.sys.model.TeachingExample" >
+    delete from teaching
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zx.sys.model.Teaching" >
+    insert into teaching (teacher_id, curriculum_id, class_id, 
+      start_time, end_time)
+    values (#{teacherId,jdbcType=INTEGER}, #{curriculumId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.sys.model.Teaching" >
+    insert into teaching
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        teacher_id,
+      </if>
+      <if test="curriculumId != null" >
+        curriculum_id,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="curriculumId != null" >
+        #{curriculumId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.sys.model.TeachingExample" resultType="java.lang.Integer" >
+    select count(*) from teaching
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+    update teaching
+    <set >
+      <if test="record.teacherId != null" >
+        teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.curriculumId != null" >
+        curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classId != null" >
+        class_id = #{record.classId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update teaching
+    set teacher_id = #{record.teacherId,jdbcType=INTEGER},
+      curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
+      class_id = #{record.classId,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.sys.model.Teaching" >
+    update teaching
+    <set >
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and curriculum_id = #{curriculumId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.sys.model.Teaching" >
+    update teaching
+    set start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+      and curriculum_id = #{curriculumId,jdbcType=INTEGER}
+      and class_id = #{classId,jdbcType=INTEGER}
+  </update>
+
+
+
+<!--自定义-->
+
+
+
+  <select id="selectPagination" resultMap="BaseResultMap">
+    select *
+    from teaching
+    limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <select id="selectIdList" resultType="java.lang.Integer">
+    select distinct #{column,jdbcType=VARCHAR}
+    from teaching
+  </select>
+
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.sys.dao.DictDataDao" >
+    <sql id="Base_Column_List">
+        ID, DictID, DictGroupID, vc_Name, i_IsEnable, i_Flag, vc_Memo
+    </sql>
+    <sql id="Select_Column_List">
+        DictID, DictGroupID, vc_Name, i_IsEnable AS isEnable, i_Flag as flag, vc_Memo
+    </sql>
+
+    <insert id="saveDictData" parameterType="com.dsa.sys.model.DictData">
+        insert into sys_dictdata
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="dictID != null" >
+                DictID,
+            </if>
+            <if test="dictGroupID != null" >
+                DictGroupID,
+            </if>
+            <if test="vcName != null" >
+                vc_Name,
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable,
+            </if>
+            <if test="flag != null" >
+                i_Flag,
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="dictID != null" >
+                #{dictID,jdbcType=INTEGER},
+            </if>
+            <if test="dictGroupID != null" >
+                #{dictGroupID,jdbcType=INTEGER},
+            </if>
+            <if test="vcName != null" >
+                #{vcName,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null" >
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="vcMemo != null" >
+                #{vcMemo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateDictData" parameterType="com.dsa.sys.model.DictData">
+        update sys_dictdata
+        <set >
+            <if test="vcName != null" >
+                vc_Name = #{vcName,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable = #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                i_Flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo = #{vcMemo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DictID = #{dictID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delDictDataByIds">
+        delete from sys_dictdata where 1>2  or
+            DictID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectMaxDictID" resultType="com.dsa.sys.model.DictData">
+        SELECT
+          <include refid="Base_Column_List" />
+        FROM
+            `sys_dictdata` a
+        WHERE
+            a.DictGroupID = #{dictGroupID}
+        ORDER BY
+            a.DictID DESC
+        LIMIT 1;
+    </select>
+
+    <select id="findDictDataList" resultType="com.dsa.sys.model.DictData">
+        SELECT
+          <include refid="Select_Column_List" />
+        FROM
+          `sys_dictdata` a
+        WHERE
+          a.DictGroupID = #{dictGroupID}
+    </select>
+</mapper>

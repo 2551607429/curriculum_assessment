@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dsa-web:war">
+    <output-path>$PROJECT_DIR$/dsa-web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>dsa-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="dsa5200.war">
+      <element id="artifact" artifact-name="dsa-web:war exploded" />
+    </root>
+  </artifact>
+</component>

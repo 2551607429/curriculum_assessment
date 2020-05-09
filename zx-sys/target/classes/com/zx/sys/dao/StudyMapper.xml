@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.sys.dao.StudyMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.sys.model.Study" >
+    <id column="stu_id" property="stuId" jdbcType="INTEGER" />
+    <id column="knows_id" property="knowsId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="questions" property="questions" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stu_id, knows_id, start_time, end_time, state, questions
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.sys.model.StudyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.zx.sys.model.StudyKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from study
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and knows_id = #{knowsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zx.sys.model.StudyKey" >
+    delete from study
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and knows_id = #{knowsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zx.sys.model.StudyExample" >
+    delete from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zx.sys.model.Study" >
+    insert into study (stu_id, knows_id, start_time, 
+      end_time, state, questions
+      )
+    values (#{stuId,jdbcType=INTEGER}, #{knowsId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{questions,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.sys.model.Study" >
+    insert into study
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="knowsId != null" >
+        knows_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="questions != null" >
+        questions,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="knowsId != null" >
+        #{knowsId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="questions != null" >
+        #{questions,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.sys.model.StudyExample" resultType="java.lang.Integer" >
+    select count(*) from study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update study
+    <set >
+      <if test="record.stuId != null" >
+        stu_id = #{record.stuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.knowsId != null" >
+        knows_id = #{record.knowsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.questions != null" >
+        questions = #{record.questions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update study
+    set stu_id = #{record.stuId,jdbcType=INTEGER},
+      knows_id = #{record.knowsId,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER},
+      questions = #{record.questions,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.sys.model.Study" >
+    update study
+    <set >
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="questions != null" >
+        questions = #{questions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and knows_id = #{knowsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.sys.model.Study" >
+    update study
+    set start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      questions = #{questions,jdbcType=VARCHAR}
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and knows_id = #{knowsId,jdbcType=INTEGER}
+  </update>
+</mapper>

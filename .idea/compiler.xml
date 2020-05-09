@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dsa-web" />
+        <module name="dsa-security" />
+        <module name="dsa-common" />
+        <module name="zx-config" />
+        <module name="dsa-ac" />
+        <module name="dsa-as" />
+        <module name="dsa-core" />
+        <module name="zx-utils" />
+        <module name="dsa-sys" />
+        <module name="dsa-key" />
+        <module name="dsa-utils" />
+        <module name="zx-sys" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="curriculum_assessment" target="1.8" />
+      <module name="dsa-ac" target="1.8" />
+      <module name="dsa-as" target="1.8" />
+      <module name="dsa-common" target="1.8" />
+      <module name="dsa-core" target="1.8" />
+      <module name="dsa-key" target="1.8" />
+      <module name="dsa-security" target="1.8" />
+      <module name="dsa-sys" target="1.8" />
+      <module name="dsa-utils" target="1.8" />
+      <module name="dsa-web" target="1.8" />
+      <module name="zx-config" target="1.8" />
+      <module name="zx-sys" target="1.8" />
+      <module name="zx-utils" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dsa-ac" options="-parameters" />
+      <module name="dsa-as" options="-parameters" />
+      <module name="dsa-common" options="-parameters" />
+      <module name="dsa-core" options="-parameters" />
+      <module name="dsa-key" options="-parameters" />
+      <module name="dsa-security" options="-parameters" />
+      <module name="dsa-sys" options="-parameters" />
+      <module name="dsa-utils" options="-parameters" />
+      <module name="dsa-web" options="-parameters" />
+      <module name="zx-config" options="-parameters" />
+      <module name="zx-sys" options="-parameters" />
+      <module name="zx-utils" options="-parameters" />
+    </option>
+  </component>
+</project>

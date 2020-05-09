@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.core.dao.AreaInfoDao">
+    <select id="findAreaInfo" resultType="com.dsa.core.dto.AreaInfoOutputDto">
+SELECT
+            a.UnitID unitId,
+            a.AreaID areaId,
+            a.vc_Code vcCode,
+            a.vc_Name vcName,
+            a.i_MainType iMainType,
+            a.i_SubType iSubType,
+            a.SvgID svgId,
+            a.T3DID t3DId,
+            a.i_Param1 iParam1,
+            a.i_Param2 iParam2,
+            a.i_Param3 iParam3,
+            a.vc_Param1 vcParam1,
+            a.vc_Param2 vcParam2,
+            a.vc_Param3 vcParam3,
+            a.i_Sort iSort,
+            a.i_IsEnable iIsEnable,
+            a.i_Flag iFlag,
+            a.vc_Memo vcMemo,
+            b.vc_Name unitName
+        FROM
+            m_areainfo a
+		INNER JOIN m_unitinfo b ON a.UnitID = b.UnitID
+		INNER JOIN m_orginfo c on c.OrgID = b.OrgID
+        WHERE 1 = 1
+        <if test="orgId != null and orgId != ''"><!-- 如果选择组织查询 -->
+        AND  FIND_IN_SET(c.OrgID, GETORGIDLIST(#{orgId}))
+        </if>
+        <if test="unitId != null and unitId != ''">
+        AND  a.UnitID = #{unitId}
+        </if>
+        <if test="unitName != null and unitName != ''">
+            AND  b.vc_Name LIKE "%${unitName}%"
+        </if>
+        <if test="vcName != null and vcName != ''">
+            AND  a.vc_Name LIKE "%${vcName}%"
+        </if>
+        <if test="vcCode != null and vcCode != ''">
+            AND  a.vc_Code = #{vcCode}
+        </if>
+        <if test="iMainType != null and iMainType != ''">
+            AND  a.i_MainType = #{iMainType}
+        </if>
+        <if test="iSubType != null and iSubType != ''">
+            AND  a.i_SubType = #{iSubType}
+        </if>
+    </select>
+    <insert id="insertAreaInfo">
+        INSERT  INTO m_areainfo (UnitID,AreaID,vc_Code,vc_Name,i_MainType,i_SubType,SvgID,T3DID,i_Param1,i_Param2,i_Param3,vc_Param1,vc_Param2,vc_Param3,i_Sort,i_IsEnable,i_Flag,vc_Memo) VALUE
+        (#{unitId},#{areaId},#{vcCode},#{vcName},#{iMainType},#{iSubType},#{svgId},#{t3DId},#{iParam1},#{iParam2},#{iParam3},#{vcParam1},#{vcParam2},#{vcParam3},#{iSort},#{iIsEnable},#{iFlag},#{vcMemo})
+    </insert>
+    <update id="updateAreaInfo">
+        UPDATE m_areainfo SET
+        <trim suffixOverrides=",">
+            <if test="unitId != null">
+                UnitID = #{unitId},
+            </if>
+            <if test="vcCode != null">
+                vc_Code = #{vcCode},
+            </if>
+            <if test="vcName != null">
+                vc_Name = #{vcName},
+            </if>
+            <if test="iMainType != null">
+                i_MainType = #{iMainType},
+            </if>
+            <if test="iSubType != null">
+                i_SubType = #{iSubType},
+            </if>
+            <if test="svgId != null">
+                SvgID = #{svgId},
+            </if>
+            <if test="t3DId != null">
+                T3DID = #{t3DId},
+            </if>
+            <if test="iParam1 != null">
+                i_Param1 = #{iParam1},
+            </if>
+            <if test="iParam2 != null">
+                i_Param2 = #{iParam2},
+            </if>
+            <if test="iParam3 != null">
+                i_Param3 = #{iParam3},
+            </if>
+            <if test="vcParam1 != null">
+                vc_Param1 = #{vcParam1},
+            </if>
+            <if test="vcParam2 != null">
+                vc_Param2 = #{vcParam2},
+            </if>
+            <if test="vcParam3 != null">
+                vc_Param3 = #{vcParam3},
+            </if>
+            <if test="iSort != null">
+                i_Sort = #{iSort},
+            </if>
+            <if test="iIsEnable != null">
+                i_IsEnable = #{iIsEnable},
+            </if>
+            <if test="iFlag != null">
+                i_Flag = #{iFlag},
+            </if>
+            <if test="vcMemo != null">
+                vc_Memo = #{vcMemo},
+            </if>
+        </trim>
+        WHERE AreaID = #{areaId}
+    </update>
+
+    <delete id="deleteAreaInfo">
+        DELETE  FROM m_areainfo WHERE AreaID IN
+        <foreach collection="areaInfoList" separator="," open="(" close=")" item="item" index="index">
+            #{item.areaId}
+        </foreach>
+    </delete>
+</mapper>

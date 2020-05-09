@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.as.dao.UserMapper" >
+  <select id="findAll" resultType="com.dsa.as.model.User">
+        select * from t_user
+  </select>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(user_id) from t_user
+    </select>
+</mapper>

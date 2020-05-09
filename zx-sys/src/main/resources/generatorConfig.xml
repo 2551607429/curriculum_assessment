@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="D:/maven仓库/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" />
+    <context id="test" targetRuntime="MyBatis3">
+
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        <commentGenerator>
+            <!-- 这个元素用来去除指定生成的注释中是否包含生成的日期 false:表示保护 -->
+            <!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true -->
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/curriculum_assessment"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <!-- This property is used to specify whether MyBatis Generator should
+             force the use of java.math.BigDecimal for DECIMAL and NUMERIC fields, -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 指定javaBean的生成策略  文件夹自己定义-->
+        <javaModelGenerator targetPackage="com.zx.sys.model"
+                            targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- sqlMapGenerator：sql映射生成策略： -->
+        <sqlMapGenerator targetPackage="com.zx.sys.dao"
+                         targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- javaClientGenerator:指定mapper接口所在的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zx.sys.dao"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 指定要逆向分析哪些表：根据表要创建javaBean -->
+<!--        <table tableName="achievement" domainObjectName="Achievement"></table>-->
+<!--        <table tableName="admin" domainObjectName="Admin"></table>-->
+<!--        <table tableName="answer_paper" domainObjectName="AnswerPaper"></table>-->
+<!--        <table tableName="chapter" domainObjectName="Chapter"></table>-->
+<!--        <table tableName="class" domainObjectName="Class"></table>-->
+<!--        <table tableName="college" domainObjectName="College"></table>-->
+<!--        <table tableName="curriculum" domainObjectName="Curriculum"></table>-->
+<!--        <table tableName="exam" domainObjectName="Exam"></table>-->
+<!--        <table tableName="knowledge" domainObjectName="Knowledge"></table>-->
+<!--        <table tableName="notice" domainObjectName="Notice"></table>-->
+<!--        <table tableName="notice_log" domainObjectName="NoticeLog"></table>-->
+<!--        <table tableName="question" domainObjectName="Question"></table>-->
+<!--        <table tableName="question_type" domainObjectName="QuestionType"></table>-->
+<!--        <table tableName="registration_key" domainObjectName="RegistrationKey"></table>-->
+<!--        <table tableName="student" domainObjectName="Student"></table>-->
+<!--        <table tableName="study" domainObjectName="Study"></table>-->
+<!--        <table tableName="teacher" domainObjectName="Teacher"></table>-->
+<!--        <table tableName="teaching" domainObjectName="Teaching"></table>-->
+        <!--&lt;!&ndash; 要生成哪些表 &ndash;&gt;-->
+<!--        <table tableName="t_user" domainObjectName="user"-->
+<!--        enableCountByExample="false" enableUpdateByExample="false"-->
+<!--        enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--        selectByExampleQueryId="false"></table>-->
+    </context>
+</generatorConfiguration>

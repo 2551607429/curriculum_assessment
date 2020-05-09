@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.sys.dao.DictDao" >
+    <sql id="Base_Column_List">
+        ID AS id, DictGroupID, vc_Name, i_Type AS type, i_IsEnable AS isEnable, i_Flag AS flag, vc_Memo
+    </sql>
+
+    <insert id="insertDictGroup" parameterType="com.dsa.sys.model.DictGroup" >
+        insert into sys_dictgroup
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="dictGroupID != null" >
+                DictGroupID,
+            </if>
+            <if test="vcName != null" >
+                vc_Name,
+            </if>
+            <if test="type != null" >
+                i_Type,
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable,
+            </if>
+            <if test="flag != null" >
+                i_Flag,
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="dictGroupID != null" >
+                #{dictGroupID,jdbcType=INTEGER},
+            </if>
+            <if test="vcName != null" >
+                #{vcName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null" >
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="vcMemo != null" >
+                #{vcMemo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateDictGroup" parameterType="com.dsa.sys.model.DictGroup">
+        update sys_dictgroup
+        <set >
+            <if test="vcName != null" >
+                vc_Name = #{vcName,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                i_Type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null" >
+                i_IsEnable = #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                i_Flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="vcMemo != null" >
+                vc_Memo = #{vcMemo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DictGroupID = #{dictGroupID,jdbcType=BIGINT}
+    </update>
+
+    <resultMap id="DictGroupListMap" type="com.dsa.sys.dto.DictGroupOutput">
+        <id property="id" column="ID" />
+        <result property="dictGroupID" column="DictGroupID"/>
+        <result property="vcName" column="vc_Name"/>
+        <result property="type" column="i_Type"/>
+        <result property="isEnable" column="i_IsEnable"/>
+        <result property="flag" column="i_Flag"/>
+        <result property="vcMemo" column="vc_Memo"/>
+        <collection property="dictDataList" ofType="com.dsa.sys.dto.DictDataDto" select="com.dsa.sys.dao.DictDao.getDictDataList" column="DictGroupID"/>
+    </resultMap>
+
+    <select id="getDictDataList" parameterType="int" resultType="com.dsa.sys.model.DictData">
+        SELECT
+          a.DictID AS dictID,
+          a.DictGroupID AS dictGroupID,
+          a.vc_Name AS vcName,
+          a.i_IsEnable AS isEnable,
+          a.i_Flag AS flag,
+          a.vc_Memo AS vcMemo
+        FROM
+          sys_dictdata a
+        WHERE
+          a.DictGroupID = #{DictGroupID}
+    </select>
+
+    <select id="selectByPageAndSelections" resultMap="DictGroupListMap">
+        SELECT
+            a.DictGroupID AS dictGroupID,
+            a.vc_Name,
+            a.i_Type,
+            a.i_IsEnable,
+            a.i_Flag,
+            a.vc_Memo
+        FROM
+          sys_dictgroup a
+        <where>
+            <if test="dictGroupID != null and '' != dictGroupID">
+                a.DictGroupID  LIKE CONCAT('%',#{dictGroupID},'%')
+            </if>
+            <if test="vcName != null and '' != vcName">
+                AND a.vc_Name  LIKE CONCAT('%',#{vcName},'%')
+            </if>
+            <if test=" isEnable != null ">
+                AND a.i_IsEnable = #{isEnable, jdbcType=INTEGER}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByDictGroupID" resultType="com.dsa.sys.model.DictGroup">
+        select
+        <include refid="Base_Column_List" />
+        from
+        sys_dictgroup
+        where
+        DictGroupID=#{dictGroupID}
+    </select>
+
+    <delete id="delDictGroupById" parameterType="integer">
+        delete from sys_dictgroup where DictGroupID = #{dictGroupID,jdbcType=INTEGER}
+    </delete>
+</mapper>

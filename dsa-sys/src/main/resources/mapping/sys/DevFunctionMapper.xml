@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dsa.sys.dao.DevFunctionDao" >
+    <sql id="DevFunction_Column_List">
+        ID AS id, DevTypeID, FunctionID, vc_Name, vc_Desc, vc_Unit, i_NodeType AS nodeType, i_Flag AS flag, vc_Memo
+    </sql>
+
+    <insert id="insertBatch" parameterType="list">
+        insert into m_devfunction (DevTypeID, FunctionID, vc_Name, vc_Desc, vc_Unit, i_NodeType, i_Flag, vc_Memo) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.devTypeId},
+            #{item.functionId},
+            #{item.vcName},
+            #{item.vcDesc},
+            #{item.vcUnit},
+            #{item.nodeType},
+            #{item.flag},
+            #{item.vcMemo})
+        </foreach>
+    </insert>
+
+    <delete id="removeLinkFuns">
+        DELETE FROM m_devfunction d WHERE d.DevTypeID = #{devTypeId}
+    </delete>
+
+    <select id="find" resultType="com.dsa.sys.model.DevFunction">
+        SELECT
+          <include refid="DevFunction_Column_List" />
+        FROM
+          m_devfunction m
+        WHERE
+          m.DevTypeID = #{devTypeId}
+    </select>
+
+    <select id="getMaxFunctionId" resultType="java.lang.Integer">
+         SELECT
+            MAX(m.FunctionID)
+        FROM
+            m_devfunction m
+    </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-ac" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-ac/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-ac/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-as" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-as/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-as/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-key" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-key/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-key/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-security" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-sys" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-sys/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-sys/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-utils/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dsa-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zx-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zx-sys/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zx-utils/src/main/java" charset="UTF-8" />
+  </component>
+</project>
