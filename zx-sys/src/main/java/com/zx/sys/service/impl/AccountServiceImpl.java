@@ -1,6 +1,6 @@
 package com.zx.sys.service.impl;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dao.*;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.*;
@@ -587,6 +587,7 @@ public class AccountServiceImpl implements IAccountService {
         else if(option == 2){
             Teacher teacher = teacherMapper.selectByUserName(username);
             userInfoDto.setId(teacher.getId());
+            userInfoDto.setTeacherId(teacher.getTeacherId());
             userInfoDto.setUsername(teacher.getUsername());
             userInfoDto.setPass(teacher.getPassword());
             userInfoDto.setName(teacher.getName());

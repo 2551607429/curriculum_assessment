@@ -1,6 +1,6 @@
 package com.zx.sys.service.impl;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dao.*;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.*;
@@ -318,8 +318,8 @@ public class UserManageImpl implements IUserManageService {
         teaching.setTeacherId(teachingInfoDto.getTeacherId());
         teaching.setClassId(teachingInfoDto.getClassId());
         teaching.setCurriculumId(teachingInfoDto.getCurriculumId());
-        teaching.setStartTime(teachingInfoDto.getStartTime());
-        teaching.setEndTime(teachingInfoDto.getEndTime());
+        teaching.setStartTime(teachingInfoDto.getTeachingDate().get(0));
+        teaching.setEndTime(teachingInfoDto.getTeachingDate().get(1));
         try {
             teachingMapper.insertSelective(teaching);
             responseBean.setCode("200");
@@ -363,13 +363,18 @@ public class UserManageImpl implements IUserManageService {
                 classMapper.selectByName(value.getClassName()) != null &&
                 curriculumMapper.selectByName(value.getCurriculumName()) != null &&
                 value.getStartTime().toString().matches(regexDate) && value.getEndTime().toString().matches(regexDate)){
-                    value.setTeacherId(teacherMapper.selectByTeacherId(value.getTeachId()).getId());
-                    value.setClassId(classMapper.selectByName(value.getClassName()));
-                    value.setCurriculumId(curriculumMapper.selectByName(value.getCurriculumName()).getId());
-                    res = addTeaching(value);
-                    if("200".equals(res.getCode())) {
+                    Teaching teaching = new Teaching();
+                    teaching.setTeacherId(teacherMapper.selectByTeacherId(value.getTeachId()).getId());
+                    teaching.setClassId(classMapper.selectByName(value.getClassName()));
+                    teaching.setCurriculumId(curriculumMapper.selectByName(value.getCurriculumName()).getId());
+                    teaching.setStartTime(value.getStartTime());
+                    teaching.setEndTime(value.getEndTime());
+                    try {
+                        teachingMapper.insertSelective(teaching);
                         flag = true;
                         successCount++;
+                    } catch (Exception e) {
+                        flag = false;
                     }
                 }
                 else if(teacherMapper.selectByTeacherId(value.getTeachId()) == null){

@@ -15,12 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.zx</groupId>
-            <artifactId>dsa-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.zx</groupId>
-            <artifactId>dsa-common</artifactId>
+            <artifactId>zx-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

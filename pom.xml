@@ -4,18 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>dsa-ac</module>
-        <module>dsa-as</module>
-        <module>dsa-common</module>
-        <module>dsa-core</module>
-        <module>dsa-key</module>
-        <module>dsa-sys</module>
-        <module>dsa-utils</module>
-        <module>dsa-web</module>
-        <module>dsa-security</module>
         <module>zx-sys</module>
         <module>zx-utils</module>
         <module>zx-config</module>
+        <module>zx-web</module>
+        <module>zx-common</module>
+        <module>zx-security</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

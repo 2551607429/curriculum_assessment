@@ -222,7 +222,7 @@
   </select>
 
   <select id="selectIdList" resultType="java.lang.Integer">
-    select distinct #{column,jdbcType=VARCHAR}
+    select distinct ${column}
     from teaching
   </select>
 

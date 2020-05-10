@@ -12,9 +12,12 @@
       <module fileurl="file://$PROJECT_DIR$/dsa-sys/dsa-sys.iml" filepath="$PROJECT_DIR$/dsa-sys/dsa-sys.iml" />
       <module fileurl="file://$PROJECT_DIR$/dsa-utils/dsa-utils.iml" filepath="$PROJECT_DIR$/dsa-utils/dsa-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/dsa-web/dsa-web.iml" filepath="$PROJECT_DIR$/dsa-web/dsa-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zx-common/zx-common.iml" filepath="$PROJECT_DIR$/zx-common/zx-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-config/zx-config.iml" filepath="$PROJECT_DIR$/zx-config/zx-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zx-security/zx-security.iml" filepath="$PROJECT_DIR$/zx-security/zx-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-sys/zx-sys.iml" filepath="$PROJECT_DIR$/zx-sys/zx-sys.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-utils/zx-utils.iml" filepath="$PROJECT_DIR$/zx-utils/zx-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zx-web/zx-web.iml" filepath="$PROJECT_DIR$/zx-web/zx-web.iml" />
     </modules>
   </component>
 </project>

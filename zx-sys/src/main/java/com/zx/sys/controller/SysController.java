@@ -1,6 +1,6 @@
 package com.zx.sys.controller;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.Class;
 import com.zx.sys.model.College;

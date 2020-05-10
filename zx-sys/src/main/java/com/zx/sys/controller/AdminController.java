@@ -1,6 +1,6 @@
 package com.zx.sys.controller;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.*;
 import com.zx.sys.model.Class;
@@ -517,7 +517,7 @@ public class AdminController {
         return iUserManageService.curriculumInfo();
     }
 
-    @PostMapping("/class_info")
+    @PostMapping("/teaching_info")
     /**
      * Description 获取任课信息中的所有筛选信息
      * @Author ZX

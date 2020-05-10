@@ -7,18 +7,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="dsa-sys" />
+        <module name="zx-utils" />
+        <module name="zx-security" />
+        <module name="dsa-ac" />
+        <module name="dsa-core" />
         <module name="dsa-web" />
+        <module name="dsa-utils" />
+        <module name="dsa-key" />
+        <module name="zx-sys" />
+        <module name="zx-common" />
         <module name="dsa-security" />
         <module name="dsa-common" />
-        <module name="zx-config" />
-        <module name="dsa-ac" />
+        <module name="zx-web" />
         <module name="dsa-as" />
-        <module name="dsa-core" />
-        <module name="zx-utils" />
-        <module name="dsa-sys" />
-        <module name="dsa-key" />
-        <module name="dsa-utils" />
-        <module name="zx-sys" />
+        <module name="zx-config" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -32,9 +35,12 @@
       <module name="dsa-sys" target="1.8" />
       <module name="dsa-utils" target="1.8" />
       <module name="dsa-web" target="1.8" />
+      <module name="zx-common" target="1.8" />
       <module name="zx-config" target="1.8" />
+      <module name="zx-security" target="1.8" />
       <module name="zx-sys" target="1.8" />
       <module name="zx-utils" target="1.8" />
+      <module name="zx-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -48,9 +54,12 @@
       <module name="dsa-sys" options="-parameters" />
       <module name="dsa-utils" options="-parameters" />
       <module name="dsa-web" options="-parameters" />
+      <module name="zx-common" options="-parameters" />
       <module name="zx-config" options="-parameters" />
+      <module name="zx-security" options="-parameters" />
       <module name="zx-sys" options="-parameters" />
       <module name="zx-utils" options="-parameters" />
+      <module name="zx-web" options="-parameters" />
     </option>
   </component>
 </project>

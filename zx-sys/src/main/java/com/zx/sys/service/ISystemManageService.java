@@ -1,6 +1,6 @@
 package com.zx.sys.service;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.DataInfoDto;
 import com.zx.sys.dto.NoticeInfoDto;
 import com.zx.sys.model.Chapter;

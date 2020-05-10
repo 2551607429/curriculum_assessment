@@ -1,6 +1,6 @@
 package com.zx.sys.service;
 
-import com.dsa.common.enums.ResponseBean;
+import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.DataInfoDto;
 import com.zx.sys.dto.LoginInputDto;
 import com.zx.sys.dto.UserInfoDto;

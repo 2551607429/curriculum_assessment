@@ -3,6 +3,7 @@ package com.zx.sys.dto;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName TeachingInfoDto
@@ -26,6 +27,8 @@ public class TeachingInfoDto {
     private Integer classId;
 
     private String className;
+
+    private List<Date> teachingDate;
 
     private Date startTime;
 

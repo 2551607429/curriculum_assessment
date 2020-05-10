@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zx-web:war">
+    <output-path>$PROJECT_DIR$/zx-web/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>zx-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="assess.war">
+      <element id="artifact" artifact-name="zx-web:war exploded" />
+    </root>
+  </artifact>
+</component>

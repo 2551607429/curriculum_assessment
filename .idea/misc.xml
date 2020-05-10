@@ -2,6 +2,7 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/dsa-web" />
+    <file type="web" url="file://$PROJECT_DIR$/zx-web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
