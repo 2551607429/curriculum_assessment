@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 /**
- * @author
+ * @author ZX
  * @title: ResponseBean
  * @projectName ommup
  * @description: 统一返回格式

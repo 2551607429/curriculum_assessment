@@ -414,6 +414,256 @@ public class ExamExample {
             addCriterion("total_score not between", value1, value2, "totalScore");
             return (Criteria) this;
         }
+
+        public Criteria andDifficultyIsNull() {
+            addCriterion("difficulty is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyIsNotNull() {
+            addCriterion("difficulty is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyEqualTo(Float value) {
+            addCriterion("difficulty =", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyNotEqualTo(Float value) {
+            addCriterion("difficulty <>", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyGreaterThan(Float value) {
+            addCriterion("difficulty >", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyGreaterThanOrEqualTo(Float value) {
+            addCriterion("difficulty >=", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyLessThan(Float value) {
+            addCriterion("difficulty <", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyLessThanOrEqualTo(Float value) {
+            addCriterion("difficulty <=", value, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyIn(List<Float> values) {
+            addCriterion("difficulty in", values, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyNotIn(List<Float> values) {
+            addCriterion("difficulty not in", values, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyBetween(Float value1, Float value2) {
+            addCriterion("difficulty between", value1, value2, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andDifficultyNotBetween(Float value1, Float value2) {
+            addCriterion("difficulty not between", value1, value2, "difficulty");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeIsNull() {
+            addCriterion("exam_range is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeIsNotNull() {
+            addCriterion("exam_range is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeEqualTo(Integer value) {
+            addCriterion("exam_range =", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeNotEqualTo(Integer value) {
+            addCriterion("exam_range <>", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeGreaterThan(Integer value) {
+            addCriterion("exam_range >", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("exam_range >=", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeLessThan(Integer value) {
+            addCriterion("exam_range <", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeLessThanOrEqualTo(Integer value) {
+            addCriterion("exam_range <=", value, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeIn(List<Integer> values) {
+            addCriterion("exam_range in", values, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeNotIn(List<Integer> values) {
+            addCriterion("exam_range not in", values, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeBetween(Integer value1, Integer value2) {
+            addCriterion("exam_range between", value1, value2, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamRangeNotBetween(Integer value1, Integer value2) {
+            addCriterion("exam_range not between", value1, value2, "examRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeIsNull() {
+            addCriterion("class_range is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeIsNotNull() {
+            addCriterion("class_range is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeEqualTo(String value) {
+            addCriterion("class_range =", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeNotEqualTo(String value) {
+            addCriterion("class_range <>", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeGreaterThan(String value) {
+            addCriterion("class_range >", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeGreaterThanOrEqualTo(String value) {
+            addCriterion("class_range >=", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeLessThan(String value) {
+            addCriterion("class_range <", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeLessThanOrEqualTo(String value) {
+            addCriterion("class_range <=", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeLike(String value) {
+            addCriterion("class_range like", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeNotLike(String value) {
+            addCriterion("class_range not like", value, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeIn(List<String> values) {
+            addCriterion("class_range in", values, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeNotIn(List<String> values) {
+            addCriterion("class_range not in", values, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeBetween(String value1, String value2) {
+            addCriterion("class_range between", value1, value2, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andClassRangeNotBetween(String value1, String value2) {
+            addCriterion("class_range not between", value1, value2, "classRange");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdIsNull() {
+            addCriterion("curriculum_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdIsNotNull() {
+            addCriterion("curriculum_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdEqualTo(Integer value) {
+            addCriterion("curriculum_id =", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdNotEqualTo(Integer value) {
+            addCriterion("curriculum_id <>", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdGreaterThan(Integer value) {
+            addCriterion("curriculum_id >", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("curriculum_id >=", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdLessThan(Integer value) {
+            addCriterion("curriculum_id <", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdLessThanOrEqualTo(Integer value) {
+            addCriterion("curriculum_id <=", value, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdIn(List<Integer> values) {
+            addCriterion("curriculum_id in", values, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdNotIn(List<Integer> values) {
+            addCriterion("curriculum_id not in", values, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdBetween(Integer value1, Integer value2) {
+            addCriterion("curriculum_id between", value1, value2, "curriculumId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurriculumIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("curriculum_id not between", value1, value2, "curriculumId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

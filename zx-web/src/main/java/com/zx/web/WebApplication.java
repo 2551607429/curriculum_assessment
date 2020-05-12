@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @param
  * @return
  */
-@SpringBootApplication(scanBasePackages = {"com.dsa","com.zx"})
-@MapperScan({"com.dsa.*.dao","com.zx.*.dao"})
+@SpringBootApplication(scanBasePackages = {"com.zx"})
+@MapperScan({"com.zx.*.dao"})
 @EnableTransactionManagement
 public class WebApplication {
     public static void main(String[] args) {

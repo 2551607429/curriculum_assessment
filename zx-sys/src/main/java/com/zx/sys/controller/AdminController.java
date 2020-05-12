@@ -371,7 +371,7 @@ public class AdminController {
 
     @PostMapping("/edit_college")
     /**
-     * Description 修改二级学院信息
+     *      * Description 修改二级学院信息
      * @Author ZX
      * @Date 15:24 2020/5/5
      * @param [college]
@@ -489,7 +489,7 @@ public class AdminController {
      * @param [teachingInfoDto]
      * @return com.dsa.common.enums.ResponseBean
      */
-    public ResponseBean editTeaching(@RequestBody TeachingInfoDto teachingInfoDto){
+    public ResponseBean esdiTeaching(@RequestBody TeachingInfoDto teachingInfoDto){
         return iUserManageService.editTeaching(teachingInfoDto);
     }
 

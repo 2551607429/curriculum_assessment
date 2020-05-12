@@ -13,6 +13,7 @@
     <result column="keyword" property="keyword" jdbcType="VARCHAR" />
     <result column="curriculum_id" property="curriculumId" jdbcType="INTEGER" />
     <result column="chapter_id" property="chapterId" jdbcType="INTEGER" />
+    <result column="difficulty" property="difficulty" jdbcType="REAL" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, type_id, stem, option_a, option_b, option_c, option_d, answer, keyword, curriculum_id, 
-    chapter_id
+    chapter_id, difficulty
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.sys.model.QuestionExample" >
     select
@@ -110,11 +111,13 @@
     insert into question (id, type_id, stem, 
       option_a, option_b, option_c, 
       option_d, answer, keyword, 
-      curriculum_id, chapter_id)
+      curriculum_id, chapter_id, difficulty
+      )
     values (#{id,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{stem,jdbcType=VARCHAR}, 
       #{optionA,jdbcType=VARCHAR}, #{optionB,jdbcType=VARCHAR}, #{optionC,jdbcType=VARCHAR}, 
       #{optionD,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
-      #{curriculumId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER})
+      #{curriculumId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER}, #{difficulty,jdbcType=REAL}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zx.sys.model.Question" >
     insert into question
@@ -152,6 +155,9 @@
       <if test="chapterId != null" >
         chapter_id,
       </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -186,6 +192,9 @@
       </if>
       <if test="chapterId != null" >
         #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -231,6 +240,9 @@
       <if test="record.chapterId != null" >
         chapter_id = #{record.chapterId,jdbcType=INTEGER},
       </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=REAL},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +260,8 @@
       answer = #{record.answer,jdbcType=VARCHAR},
       keyword = #{record.keyword,jdbcType=VARCHAR},
       curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
-      chapter_id = #{record.chapterId,jdbcType=INTEGER}
+      chapter_id = #{record.chapterId,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=REAL}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +299,9 @@
       <if test="chapterId != null" >
         chapter_id = #{chapterId,jdbcType=INTEGER},
       </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=REAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -300,7 +316,39 @@
       answer = #{answer,jdbcType=VARCHAR},
       keyword = #{keyword,jdbcType=VARCHAR},
       curriculum_id = #{curriculumId,jdbcType=INTEGER},
-      chapter_id = #{chapterId,jdbcType=INTEGER}
+      chapter_id = #{chapterId,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+
+
+
+  <!--  自定义-->
+
+  <select id="selectPagination" resultMap="BaseResultMap">
+    select *
+    from question
+    limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <update id="updateByInfo">
+    update question
+    set type_id = #{record.typeId,jdbcType=INTEGER},
+    stem = #{record.stem,jdbcType=VARCHAR},
+    option_a = #{record.optionA,jdbcType=VARCHAR},
+    option_b = #{record.optionB,jdbcType=VARCHAR},
+    option_c = #{record.optionC,jdbcType=VARCHAR},
+    option_d = #{record.optionD,jdbcType=VARCHAR},
+    answer = #{record.answer,jdbcType=VARCHAR},
+    keyword = #{record.keyword,jdbcType=VARCHAR},
+    curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
+    chapter_id = #{record.chapterId,jdbcType=INTEGER},
+    difficulty = #{record.difficulty,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
 </mapper>

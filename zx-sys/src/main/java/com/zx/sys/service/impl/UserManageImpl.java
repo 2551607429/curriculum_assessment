@@ -47,7 +47,6 @@ public class UserManageImpl implements IUserManageService {
     private IAccountService iAccountService;
 
 
-
     @Override
     /**
      * Description 增加用户信息
@@ -314,17 +313,18 @@ public class UserManageImpl implements IUserManageService {
      */
     public ResponseBean addTeaching(TeachingInfoDto teachingInfoDto) {
         ResponseBean responseBean = new ResponseBean();
-        Teaching teaching = new Teaching();
-        teaching.setTeacherId(teachingInfoDto.getTeacherId());
-        teaching.setClassId(teachingInfoDto.getClassId());
-        teaching.setCurriculumId(teachingInfoDto.getCurriculumId());
-        teaching.setStartTime(teachingInfoDto.getTeachingDate().get(0));
-        teaching.setEndTime(teachingInfoDto.getTeachingDate().get(1));
         try {
+            Teaching teaching = new Teaching();
+            teaching.setTeacherId(teachingInfoDto.getTeacherId());
+            teaching.setClassId(teachingInfoDto.getClassId());
+            teaching.setCurriculumId(teachingInfoDto.getCurriculumId());
+            teaching.setStartTime(teachingInfoDto.getTeachingDate().get(0));
+            teaching.setEndTime(teachingInfoDto.getTeachingDate().get(1));
             teachingMapper.insertSelective(teaching);
             responseBean.setCode("200");
             responseBean.setMsg("增加成功");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             responseBean.setCode("500");
             responseBean.setMsg("增加失败");
@@ -361,8 +361,7 @@ public class UserManageImpl implements IUserManageService {
                 boolean flag = false;
                 if(teacherMapper.selectByTeacherId(value.getTeachId()) != null &&
                 classMapper.selectByName(value.getClassName()) != null &&
-                curriculumMapper.selectByName(value.getCurriculumName()) != null &&
-                value.getStartTime().toString().matches(regexDate) && value.getEndTime().toString().matches(regexDate)){
+                curriculumMapper.selectByName(value.getCurriculumName()) != null){
                     Teaching teaching = new Teaching();
                     teaching.setTeacherId(teacherMapper.selectByTeacherId(value.getTeachId()).getId());
                     teaching.setClassId(classMapper.selectByName(value.getClassName()));
@@ -386,14 +385,8 @@ public class UserManageImpl implements IUserManageService {
                 else if(curriculumMapper.selectByName(value.getCurriculumName()) == null){
                     value.setKey("课程名称不存在，请重新输入！");
                 }
-                else if(!value.getStartTime().toString().matches(regexDate)){
-                    value.setKey("开始日期格式不正确，请重新输入！");
-                }
-                else if(!value.getEndTime().toString().matches(regexDate)){
-                    value.setKey("结束日期格式不正确，请重新输入！");
-                }
                 else{
-                    value.setKey("上传失败，请重新输入！");
+                    value.setKey("上传失败，请重新上传！");
                 }
                 if(!flag){
                     failList.add(value);
@@ -510,10 +503,10 @@ public class UserManageImpl implements IUserManageService {
         teaching.setTeacherId(teachingInfoDto.getTeacherId());
         teaching.setClassId(teachingInfoDto.getClassId());
         teaching.setCurriculumId(teachingInfoDto.getCurriculumId());
-        teaching.setStartTime(teachingInfoDto.getStartTime());
-        teaching.setEndTime(teachingInfoDto.getEndTime());
+        teaching.setStartTime(teachingInfoDto.getTeachingDate().get(0));
+        teaching.setEndTime(teachingInfoDto.getTeachingDate().get(1));
         try {
-            teachingMapper.updateByPrimaryKeySelective(teaching);
+            teachingMapper.updateByPrimaryKey(teaching);
             responseBean.setMsg("修改成功");
             responseBean.setCode("200");
         } catch (Exception e) {

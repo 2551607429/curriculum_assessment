@@ -25,6 +25,8 @@ public class Question implements Serializable {
 
     private Integer chapterId;
 
+    private Float difficulty;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -115,6 +117,14 @@ public class Question implements Serializable {
         this.chapterId = chapterId;
     }
 
+    public Float getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Float difficulty) {
+        this.difficulty = difficulty;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -137,7 +147,8 @@ public class Question implements Serializable {
             && (this.getAnswer() == null ? other.getAnswer() == null : this.getAnswer().equals(other.getAnswer()))
             && (this.getKeyword() == null ? other.getKeyword() == null : this.getKeyword().equals(other.getKeyword()))
             && (this.getCurriculumId() == null ? other.getCurriculumId() == null : this.getCurriculumId().equals(other.getCurriculumId()))
-            && (this.getChapterId() == null ? other.getChapterId() == null : this.getChapterId().equals(other.getChapterId()));
+            && (this.getChapterId() == null ? other.getChapterId() == null : this.getChapterId().equals(other.getChapterId()))
+            && (this.getDifficulty() == null ? other.getDifficulty() == null : this.getDifficulty().equals(other.getDifficulty()));
     }
 
     @Override
@@ -155,6 +166,7 @@ public class Question implements Serializable {
         result = prime * result + ((getKeyword() == null) ? 0 : getKeyword().hashCode());
         result = prime * result + ((getCurriculumId() == null) ? 0 : getCurriculumId().hashCode());
         result = prime * result + ((getChapterId() == null) ? 0 : getChapterId().hashCode());
+        result = prime * result + ((getDifficulty() == null) ? 0 : getDifficulty().hashCode());
         return result;
     }
 
@@ -175,6 +187,7 @@ public class Question implements Serializable {
         sb.append(", keyword=").append(keyword);
         sb.append(", curriculumId=").append(curriculumId);
         sb.append(", chapterId=").append(chapterId);
+        sb.append(", difficulty=").append(difficulty);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

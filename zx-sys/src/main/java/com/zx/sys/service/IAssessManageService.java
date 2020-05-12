@@ -2,8 +2,9 @@ package com.zx.sys.service;
 
 import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.DataInfoDto;
+import com.zx.sys.dto.ExamInfoDto;
 import com.zx.sys.dto.LoginInputDto;
-import com.zx.sys.dto.UserInfoDto;
+import com.zx.sys.dto.QuestionInfoDto;
 import com.zx.sys.model.Chapter;
 import com.zx.sys.model.Curriculum;
 import com.zx.sys.model.QuestionType;
@@ -138,5 +139,108 @@ public interface IAssessManageService {
      * @return
      */
     ResponseBean editChapter(Chapter chapter);
+
+    /**
+     * Description 增加题库题目信息
+     * @Author ZX
+     * @Date 21:47 2020/5/11
+     * @param questionInfoDto:题库题目信息
+     * @return
+     */
+    ResponseBean addQuestion(QuestionInfoDto questionInfoDto);
+
+    /**
+     * Description 批量上传题库题目信息
+     * @Author ZX
+     * @Date 21:47 2020/5/11
+     * @param list:题库题目列表
+     * @return
+     */
+    ResponseBean uploadQuestion(List<QuestionInfoDto> list);
+
+    /**
+     * Description 删除题库题目信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param dataInfoDto:题库题目信息
+     * @return
+     */
+    ResponseBean deleteQuestion(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 分页获取题库题目信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param dataInfoDto:加载数据信息
+     * @return
+     */
+    Map<String,Object> questionInit(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 修改题库题目信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param questionInfoDto:修改的题库题目数据
+     * @return
+     */
+    ResponseBean editQuestion(QuestionInfoDto questionInfoDto);
+
+
+    /**
+     * Description 获取所有的题目类型信息
+     * @Author ZX
+     * @Date 16:53 2020/5/12
+     * @param
+     * @return
+     */
+    Map<Integer, QuestionType> typeInfo();
+
+
+    /**
+     * Description 获取所有的章节信息
+     * @Author ZX
+     * @Date 16:53 2020/5/12
+     * @param
+     * @return
+     */
+    Map<Integer, Chapter> chapterInfo();
+
+    /**
+     * Description 增加考试信息
+     * @Author ZX
+     * @Date 21:47 2020/5/11
+     * @param examInfoDto:考试信息
+     * @return
+     */
+    ResponseBean addExam(ExamInfoDto examInfoDto);
+
+    /**
+     * Description 删除考试信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param dataInfoDto:考试信息
+     * @return
+     */
+    ResponseBean deleteExam(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 分页获取考试信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param dataInfoDto:加载数据信息
+     * @return
+     */
+    Map<String,Object> examInit(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 修改考试信息
+     * @Author ZX
+     * @Date 21:48 2020/5/11
+     * @param examInfoDto:修改的考试数据
+     * @return
+     */
+    ResponseBean editExam(ExamInfoDto examInfoDto);
+
+
 
 }

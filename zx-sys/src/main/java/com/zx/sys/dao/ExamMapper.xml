@@ -7,6 +7,10 @@
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+    <result column="difficulty" property="difficulty" jdbcType="REAL" />
+    <result column="exam_range" property="examRange" jdbcType="INTEGER" />
+    <result column="class_range" property="classRange" jdbcType="VARCHAR" />
+    <result column="curriculum_id" property="curriculumId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, start_time, end_time, total_score
+    id, name, start_time, end_time, total_score, difficulty, exam_range, class_range, 
+    curriculum_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.sys.model.ExamExample" >
     select
@@ -101,9 +106,13 @@
   </delete>
   <insert id="insert" parameterType="com.zx.sys.model.Exam" >
     insert into exam (id, name, start_time, 
-      end_time, total_score)
+      end_time, total_score, difficulty, 
+      exam_range, class_range, curriculum_id
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{totalScore,jdbcType=INTEGER})
+      #{endTime,jdbcType=TIMESTAMP}, #{totalScore,jdbcType=INTEGER}, #{difficulty,jdbcType=REAL}, 
+      #{examRange,jdbcType=INTEGER}, #{classRange,jdbcType=VARCHAR}, #{curriculumId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zx.sys.model.Exam" >
     insert into exam
@@ -123,6 +132,18 @@
       <if test="totalScore != null" >
         total_score,
       </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+      <if test="examRange != null" >
+        exam_range,
+      </if>
+      <if test="classRange != null" >
+        class_range,
+      </if>
+      <if test="curriculumId != null" >
+        curriculum_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -139,6 +160,18 @@
       </if>
       <if test="totalScore != null" >
         #{totalScore,jdbcType=INTEGER},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=REAL},
+      </if>
+      <if test="examRange != null" >
+        #{examRange,jdbcType=INTEGER},
+      </if>
+      <if test="classRange != null" >
+        #{classRange,jdbcType=VARCHAR},
+      </if>
+      <if test="curriculumId != null" >
+        #{curriculumId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -166,6 +199,18 @@
       <if test="record.totalScore != null" >
         total_score = #{record.totalScore,jdbcType=INTEGER},
       </if>
+      <if test="record.difficulty != null" >
+        difficulty = #{record.difficulty,jdbcType=REAL},
+      </if>
+      <if test="record.examRange != null" >
+        exam_range = #{record.examRange,jdbcType=INTEGER},
+      </if>
+      <if test="record.classRange != null" >
+        class_range = #{record.classRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curriculumId != null" >
+        curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +222,11 @@
       name = #{record.name,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      total_score = #{record.totalScore,jdbcType=INTEGER}
+      total_score = #{record.totalScore,jdbcType=INTEGER},
+      difficulty = #{record.difficulty,jdbcType=REAL},
+      exam_range = #{record.examRange,jdbcType=INTEGER},
+      class_range = #{record.classRange,jdbcType=VARCHAR},
+      curriculum_id = #{record.curriculumId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +246,18 @@
       <if test="totalScore != null" >
         total_score = #{totalScore,jdbcType=INTEGER},
       </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=REAL},
+      </if>
+      <if test="examRange != null" >
+        exam_range = #{examRange,jdbcType=INTEGER},
+      </if>
+      <if test="classRange != null" >
+        class_range = #{classRange,jdbcType=VARCHAR},
+      </if>
+      <if test="curriculumId != null" >
+        curriculum_id = #{curriculumId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -205,7 +266,37 @@
     set name = #{name,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      total_score = #{totalScore,jdbcType=INTEGER}
+      total_score = #{totalScore,jdbcType=INTEGER},
+      difficulty = #{difficulty,jdbcType=REAL},
+      exam_range = #{examRange,jdbcType=INTEGER},
+      class_range = #{classRange,jdbcType=VARCHAR},
+      curriculum_id = #{curriculumId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+
+
+  <!--  自定义-->
+
+  <select id="selectPagination" resultMap="BaseResultMap">
+    select *
+    from exam
+    limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <update id="updateByInfo">
+    update exam
+    set name = #{record.name,jdbcType=VARCHAR},
+    start_time = #{record.startTime,jdbcType=TIMESTAMP},
+    end_time = #{record.endTime,jdbcType=TIMESTAMP},
+    total_score = #{record.totalScore,jdbcType=INTEGER},
+    difficulty = #{record.difficulty,jdbcType=REAL},
+    exam_range = #{record.examRange,jdbcType=INTEGER},
+    class_range = #{record.classRange,jdbcType=VARCHAR},
+    curriculum_id = #{record.curriculumId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>

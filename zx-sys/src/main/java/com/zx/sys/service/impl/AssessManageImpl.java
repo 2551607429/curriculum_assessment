@@ -4,7 +4,6 @@ import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dao.*;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.*;
-import com.zx.sys.service.IAccountService;
 import com.zx.sys.service.IAssessManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +30,15 @@ public class AssessManageImpl implements IAssessManageService {
 
     @Autowired
     private ChapterMapper chapterMapper ;
+
+    @Autowired
+    private QuestionMapper questionMapper;
+
+    @Autowired
+    private ExamMapper examMapper;
+
+    @Autowired
+    private KnowledgeMapper knowledgeMapper;
 
 
     @Override
@@ -365,6 +373,342 @@ public class AssessManageImpl implements IAssessManageService {
         ResponseBean responseBean = new ResponseBean();
         try {
             chapterMapper.updateByPrimaryKey(chapter);
+            responseBean.setMsg("修改成功");
+            responseBean.setCode("200");
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseBean.setMsg("修改失败");
+            responseBean.setCode("500");
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 增加题库题目信息
+     * @Author ZX
+     * @Date 21:49 2020/5/11
+     * @param [question]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean addQuestion(QuestionInfoDto questionInfoDto) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            Question question = new Question();
+            question.setTypeId(questionInfoDto.getTypeId());
+            question.setStem(questionInfoDto.getStem());
+            if(questionInfoDto.getOptionA() != null){
+                question.setOptionA(questionInfoDto.getOptionA());
+            }
+            else{
+                question.setOptionA("");
+            }
+            if(questionInfoDto.getOptionB() != null) {
+                question.setOptionB(questionInfoDto.getOptionB());
+            }
+            else{
+                question.setOptionB("");
+            }
+            if(questionInfoDto.getOptionC() != null) {
+                question.setOptionC(questionInfoDto.getOptionC());
+            }
+            else{
+                question.setOptionC("");
+            }
+            if(questionInfoDto.getOptionD() != null) {
+                question.setOptionD(questionInfoDto.getOptionD());
+            }
+            else{
+                question.setOptionD("");
+            }
+            question.setAnswer(questionInfoDto.getAnswer());
+            if(questionInfoDto.getKeyword() != null) {
+                question.setKeyword(questionInfoDto.getKeyword());
+            }
+            else{
+                question.setKeyword("");
+            }
+            question.setCurriculumId(questionInfoDto.getCurriculumId());
+            question.setChapterId(questionInfoDto.getChapterId());
+            question.setDifficulty(questionInfoDto.getDifficulty());
+            questionMapper.insertSelective(question);
+            responseBean.setCode("200");
+            responseBean.setMsg("增加成功");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            responseBean.setCode("500");
+            responseBean.setMsg("增加失败");
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 批量上传题库题目信息
+     * @Author ZX
+     * @Date 21:50 2020/5/11
+     * @param [list]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean uploadQuestion(List<QuestionInfoDto> list) {
+        return null;
+    }
+
+    @Override
+    /**
+     * Description 删除题库题目信息
+     * @Author ZX
+     * @Date 21:51 2020/5/11
+     * @param [dataInfoDto]
+     * option:用户身份
+     * questionId:需要删除的题库题目编号
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean deleteQuestion(DataInfoDto dataInfoDto) {
+        Integer option = dataInfoDto.getOption();
+        Integer [] questionId = dataInfoDto.getId();
+        ResponseBean responseBean = new ResponseBean();
+        if(option == 2){
+            for(Integer id : questionId){
+                questionMapper.deleteByPrimaryKey(id);
+                responseBean.setCode("200");
+                responseBean.setMsg("删除成功");
+            }
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 分页获取题库题目信息
+     * @Author ZX
+     * @Date 21:52 2020/5/11
+     * @param [dataInfoDto]
+     * option:用户身份
+     * page:页码
+     * count:每页数量
+     * list:获取所选页面的题库列表
+     * map:页面题库信息
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public Map<String, Object> questionInit(DataInfoDto dataInfoDto) {
+        Integer option = dataInfoDto.getOption();
+        Integer page = dataInfoDto.getPage();
+        Integer count = dataInfoDto.getCount();
+        Map<String,Object> map = new HashMap<>();
+        if(option == 2){
+            QuestionExample questionExample = new QuestionExample();
+            //查询当前页面显示的题库题目列表
+            List<Question> list = questionMapper.selectPagination(page,count);
+            List<QuestionInfoDto> questionList = new ArrayList<>();
+            //对每个题库题目信息增加内容
+            for (Question question : list) {
+                QuestionInfoDto value = new QuestionInfoDto();
+                value.setId(question.getId());
+                value.setTypeId(question.getTypeId());
+                value.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
+                value.setStem(question.getStem());
+                value.setOptionA(question.getOptionA());
+                value.setOptionB(question.getOptionB());
+                value.setOptionC(question.getOptionC());
+                value.setOptionD(question.getOptionD());
+                value.setAnswer(question.getAnswer());
+                value.setKeyword(question.getKeyword());
+                value.setCurriculumId(question.getCurriculumId());
+                value.setCurriculumName(curriculumMapper.selectByPrimaryKey(question.getCurriculumId()).getName());
+                value.setChapterId(question.getChapterId());
+                value.setChapterName(chapterMapper.selectByPrimaryKey(question.getChapterId()).getName());
+                value.setDifficulty(question.getDifficulty());
+                questionList.add(value);
+            }
+            map.put("list",questionList);
+            map.put("total",questionMapper.countByExample(questionExample));
+            return map;
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
+    /**
+     * Description 修改题库题目信息
+     * @Author ZX
+     * @Date 21:52 2020/5/11
+     * @param [question]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean editQuestion(QuestionInfoDto questionInfoDto) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            questionMapper.updateByInfo(questionInfoDto,questionInfoDto.getId());
+            responseBean.setMsg("修改成功");
+            responseBean.setCode("200");
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseBean.setMsg("修改失败");
+            responseBean.setCode("500");
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 获取所有的题目类型信息
+     * @Author ZX
+     * @Date 16:53 2020/5/12
+     * @param []
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.QuestionType>
+     */
+    public Map<Integer, QuestionType> typeInfo() {
+        Map<Integer, QuestionType> info = new HashMap<>();
+        QuestionTypeExample questionTypeExample = new QuestionTypeExample();
+        List<QuestionType> list = questionTypeMapper.selectByExample(questionTypeExample);
+        for(QuestionType qu : list){
+            info.put(qu.getId(),qu);
+        }
+        return info;
+    }
+
+    @Override
+    /**
+     * Description 获取所有的题目章节信息
+     * @Author ZX
+     * @Date 17:04 2020/5/12
+     * @param []
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Chapter>
+     */
+    public Map<Integer, Chapter> chapterInfo() {
+        Map<Integer, Chapter> info = new HashMap<>();
+        ChapterExample chapterExample = new ChapterExample();
+        List<Chapter> list = chapterMapper.selectByExample(chapterExample);
+        for(Chapter ch : list){
+            info.put(ch.getId(),ch);
+        }
+        return info;
+    }
+
+    @Override
+    /**
+     * Description 增加考试信息
+     * @Author ZX
+     * @Date 21:43 2020/5/12
+     * @param [examInfoDto]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean addExam(ExamInfoDto examInfoDto) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            Exam exam = new Exam();
+            exam.setName(examInfoDto.getName());
+            exam.setEndTime(examInfoDto.getEndTime());
+            exam.setStartTime(examInfoDto.getStartTime());
+            exam.setTotalScore(examInfoDto.getTotalScore());
+            exam.setDifficulty(examInfoDto.getDifficulty());
+            exam.setExamRange(examInfoDto.getExamRange());
+            exam.setCurriculumId(examInfoDto.getCurriculumId());
+            if(examInfoDto.getClassRange() != null){
+                exam.setClassRange(examInfoDto.getClassRange());
+            }
+            else{
+                exam.setClassRange("");
+            }
+            examMapper.insertSelective(exam);
+            responseBean.setCode("200");
+            responseBean.setMsg("增加成功");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            responseBean.setCode("500");
+            responseBean.setMsg("增加失败");
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 删除考试信息
+     * @Author ZX
+     * @Date 21:43 2020/5/12
+     * @param [dataInfoDto]
+     * option:用户身份
+     * examId:需要删除的考试编号
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean deleteExam(DataInfoDto dataInfoDto) {
+        Integer option = dataInfoDto.getOption();
+        Integer [] examId = dataInfoDto.getId();
+        ResponseBean responseBean = new ResponseBean();
+        if(option == 2){
+            for(Integer id : examId){
+                examMapper.deleteByPrimaryKey(id);
+                responseBean.setCode("200");
+                responseBean.setMsg("删除成功");
+            }
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 分页获取考试信息
+     * @Author ZX
+     * @Date 21:44 2020/5/12
+     * @param [dataInfoDto]
+     * option:用户身份
+     * page:页码
+     * count:每页数量
+     * list:获取所选页面的考试列表
+     * map:页面题库信息
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public Map<String, Object> examInit(DataInfoDto dataInfoDto) {
+        Integer option = dataInfoDto.getOption();
+        Integer page = dataInfoDto.getPage();
+        Integer count = dataInfoDto.getCount();
+        Map<String,Object> map = new HashMap<>();
+        if(option == 2){
+            ExamExample examExample = new ExamExample();
+            //查询当前页面显示的考试列表
+            List<Exam> list = examMapper.selectPagination(page,count);
+            List<ExamInfoDto> examList = new ArrayList<>();
+            //对每个题库题目信息增加内容
+            for (Exam exam : list) {
+                ExamInfoDto value = new ExamInfoDto();
+                value.setId(exam.getId());
+                value.setName(exam.getName());
+                value.setStartTime(exam.getStartTime());
+                value.setEndTime(exam.getEndTime());
+                value.setTotalScore(exam.getTotalScore());
+                value.setDifficulty(exam.getDifficulty());
+                value.setExamRange(exam.getExamRange());
+                value.setClassRange(exam.getClassRange());
+                value.setCurriculumId(exam.getCurriculumId());
+                value.setCurriculumName(curriculumMapper.selectByPrimaryKey(exam.getCurriculumId()).getName());
+                examList.add(value);
+            }
+            map.put("list",examList);
+            map.put("total",examMapper.countByExample(examExample));
+            return map;
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
+    /**
+     * Description 修改考试信息
+     * @Author ZX
+     * @Date 21:44 2020/5/12
+     * @param [examInfoDto]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean editExam(ExamInfoDto examInfoDto) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            examMapper.updateByInfo(examInfoDto,examInfoDto.getId());
             responseBean.setMsg("修改成功");
             responseBean.setCode("200");
         } catch (Exception e) {
