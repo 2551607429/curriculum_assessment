@@ -5,6 +5,7 @@ import com.zx.sys.model.Chapter;
 import com.zx.sys.model.Question;
 import com.zx.sys.model.QuestionExample;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -51,4 +52,31 @@ public interface QuestionMapper {
      * @return
      */
     int updateByInfo(@Param("record") QuestionInfoDto record, @Param("id") Integer id);
+
+    /**
+     * 根据教师编号分页获取该教师任课的课程所包含的题库
+     * @param teacherId 教师编号
+     * @param page 第几页
+     * @param count 每页显示的个数
+     * @return
+     */
+    List<Question> selectPaginByTeach(@Param("date") Date date,
+                                      @Param("teacherId")Integer teacherId,
+                                      @Param("page") Integer page,
+                                      @Param("count") Integer count);
+
+    /**
+     * 根据教师编号获取该教师任课的题库数量
+     * @param teacherId
+     * @return
+     */
+    int countByTeacher(@Param("teacherId")Integer teacherId);
+
+    /**
+     * 根据课程编号和题型编号进行统计各题型的数量
+     * @param curriculumId 课程编号
+     * @param typeId 题型编号
+     * @return
+     */
+    Integer countByCurriculum(@Param("curriculumId")Integer curriculumId,@Param("typeId")Integer typeId);
 }

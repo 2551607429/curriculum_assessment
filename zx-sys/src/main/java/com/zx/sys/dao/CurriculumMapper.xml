@@ -215,5 +215,16 @@
     where name = #{name,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByTeacher" resultType="com.zx.sys.model.Curriculum">
+      select *
+      from curriculum c
+               join
+           (select distinct curriculum_id
+            from teaching
+            where teaching.teacher_id = 1
+              and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time) t
+           on t.curriculum_id = c.id
+  </select>
+
 
 </mapper>

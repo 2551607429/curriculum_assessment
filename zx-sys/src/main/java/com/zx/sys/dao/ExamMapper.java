@@ -4,6 +4,8 @@ import com.zx.sys.dto.ExamInfoDto;
 import com.zx.sys.dto.QuestionInfoDto;
 import com.zx.sys.model.Exam;
 import com.zx.sys.model.ExamExample;
+
+import java.util.Date;
 import java.util.List;
 
 import com.zx.sys.model.Question;
@@ -54,4 +56,18 @@ public interface ExamMapper {
      * @return
      */
     int updateByInfo(@Param("record") ExamInfoDto record, @Param("id") Integer id);
+
+
+    /**
+     * 根据教师编号分页获取该教师任课的课程所包含的考试
+     *
+     * @param page：第几页
+     * @param count：每页显示的数量
+     * @return
+     */
+    List<Exam> selectPaginByteach(@Param("date") Date date,
+                                  @Param("teacherId")Integer teacherId,
+                                  @Param("page") Integer page,
+                                  @Param("count") Integer count);
+
 }

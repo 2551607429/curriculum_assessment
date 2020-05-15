@@ -124,10 +124,10 @@ public interface IUserManageService {
      * Description 获取所有的课程信息
      * @Author ZX
      * @Date 21:48 2020/5/8
-     * @param
+     * @param dataInfoDto
      * @return
      */
-    Map<Integer, Curriculum> curriculumInfo();
+    Map<Integer, Curriculum> curriculumInfo(DataInfoDto dataInfoDto);
 
     /**
      * Description 获取任课信息中的所有筛选信息

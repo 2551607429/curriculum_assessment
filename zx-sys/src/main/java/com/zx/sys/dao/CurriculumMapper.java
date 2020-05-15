@@ -2,6 +2,8 @@ package com.zx.sys.dao;
 
 import com.zx.sys.model.Curriculum;
 import com.zx.sys.model.CurriculumExample;
+
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -49,4 +51,12 @@ public interface CurriculumMapper {
      * @return
      */
     Curriculum selectByName(@Param("name")String name);
+
+    /**
+     * 通过教师编号查询该教师所教授的课程信息
+     * @param date 当前时间
+     * @param teacherId 教师编号
+     * @return
+     */
+    List<Curriculum> selectByTeacher(@Param("date") Date date,@Param("teacherId")Integer teacherId);
 }

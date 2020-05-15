@@ -4,7 +4,9 @@ import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dao.*;
 import com.zx.sys.dto.*;
 import com.zx.sys.model.*;
+import com.zx.sys.model.Class;
 import com.zx.sys.service.IAssessManageService;
+import com.zx.utils.UtilInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class AssessManageImpl implements IAssessManageService {
     private AdminMapper adminMapper;
 
     @Autowired
+    private TeacherMapper teacherMapper;
+
+    @Autowired
     private QuestionTypeMapper questionTypeMapper;
 
     @Autowired
@@ -36,6 +41,9 @@ public class AssessManageImpl implements IAssessManageService {
 
     @Autowired
     private ExamMapper examMapper;
+
+    @Autowired
+    private ClassMapper classMapper;
 
     @Autowired
     private KnowledgeMapper knowledgeMapper;
@@ -497,38 +505,46 @@ public class AssessManageImpl implements IAssessManageService {
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
         Map<String,Object> map = new HashMap<>();
-        if(option == 2){
+        List<Question> list = new ArrayList<>();
+        List<QuestionInfoDto> questionList = new ArrayList<>();
+        //当是管理员时
+        if(option == 3){
             QuestionExample questionExample = new QuestionExample();
             //查询当前页面显示的题库题目列表
-            List<Question> list = questionMapper.selectPagination(page,count);
-            List<QuestionInfoDto> questionList = new ArrayList<>();
-            //对每个题库题目信息增加内容
-            for (Question question : list) {
-                QuestionInfoDto value = new QuestionInfoDto();
-                value.setId(question.getId());
-                value.setTypeId(question.getTypeId());
-                value.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
-                value.setStem(question.getStem());
-                value.setOptionA(question.getOptionA());
-                value.setOptionB(question.getOptionB());
-                value.setOptionC(question.getOptionC());
-                value.setOptionD(question.getOptionD());
-                value.setAnswer(question.getAnswer());
-                value.setKeyword(question.getKeyword());
-                value.setCurriculumId(question.getCurriculumId());
-                value.setCurriculumName(curriculumMapper.selectByPrimaryKey(question.getCurriculumId()).getName());
-                value.setChapterId(question.getChapterId());
-                value.setChapterName(chapterMapper.selectByPrimaryKey(question.getChapterId()).getName());
-                value.setDifficulty(question.getDifficulty());
-                questionList.add(value);
-            }
-            map.put("list",questionList);
+            list = questionMapper.selectPagination(page,count);
             map.put("total",questionMapper.countByExample(questionExample));
-            return map;
         }
-        else{
-            return null;
+        //当时教师时
+        else if(option == 2){
+            Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
+            Date date = new Date();
+            //查询当前页面显示的自己任课信息的题库题目列表
+            list = questionMapper.selectPaginByTeach(date,teacher.getId(),page,count);
+            questionList = new ArrayList<>();
+            map.put("total",questionMapper.countByTeacher(teacher.getId()));
         }
+        //对每个题库题目信息增加内容
+        for (Question question : list) {
+            QuestionInfoDto value = new QuestionInfoDto();
+            value.setId(question.getId());
+            value.setTypeId(question.getTypeId());
+            value.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
+            value.setStem(question.getStem());
+            value.setOptionA(question.getOptionA());
+            value.setOptionB(question.getOptionB());
+            value.setOptionC(question.getOptionC());
+            value.setOptionD(question.getOptionD());
+            value.setAnswer(question.getAnswer());
+            value.setKeyword(question.getKeyword());
+            value.setCurriculumId(question.getCurriculumId());
+            value.setCurriculumName(curriculumMapper.selectByPrimaryKey(question.getCurriculumId()).getName());
+            value.setChapterId(question.getChapterId());
+            value.setChapterName(chapterMapper.selectByPrimaryKey(question.getChapterId()).getName());
+            value.setDifficulty(question.getDifficulty());
+            questionList.add(value);
+        }
+        map.put("list",questionList);
+        return map;
     }
 
     @Override
@@ -585,6 +601,33 @@ public class AssessManageImpl implements IAssessManageService {
         List<Chapter> list = chapterMapper.selectByExample(chapterExample);
         for(Chapter ch : list){
             info.put(ch.getId(),ch);
+        }
+        return info;
+    }
+
+
+    @Override
+    /**
+     * Description 获取自己任课的所有班级信息
+     * @Author ZX
+     * @Date 14:43 2020/5/13
+     * @param [dataInfoDto]
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
+     */
+    public Map<Integer, Class> classInfo(DataInfoDto dataInfoDto) {
+        Map<Integer,Class> info = new HashMap<>();
+        List<Class> list = new ArrayList<>();
+        //当是教师时，只能获取自己任课的班级
+        if(dataInfoDto.getOption() == 2){
+            Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
+            list = classMapper.selectByTeacher(teacher.getId());
+        }
+        else if(dataInfoDto.getOption() == 1 || dataInfoDto.getOption() == 3){
+            ClassExample classExample = new ClassExample();
+            list = classMapper.selectByExample(classExample);
+        }
+        for(Class li : list){
+            info.put(li.getId(),li);
         }
         return info;
     }
@@ -661,6 +704,7 @@ public class AssessManageImpl implements IAssessManageService {
      * count:每页数量
      * list:获取所选页面的考试列表
      * map:页面题库信息
+     * regexClass:分割班级范围的正则表达式
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     public Map<String, Object> examInit(DataInfoDto dataInfoDto) {
@@ -668,10 +712,13 @@ public class AssessManageImpl implements IAssessManageService {
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
         Map<String,Object> map = new HashMap<>();
+        String regexClass = ";|；|\\s+";
         if(option == 2){
             ExamExample examExample = new ExamExample();
+            Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
+            Date date = new Date();
             //查询当前页面显示的考试列表
-            List<Exam> list = examMapper.selectPagination(page,count);
+            List<Exam> list = examMapper.selectPaginByteach(date,teacher.getId(),page,count);
             List<ExamInfoDto> examList = new ArrayList<>();
             //对每个题库题目信息增加内容
             for (Exam exam : list) {
@@ -684,6 +731,20 @@ public class AssessManageImpl implements IAssessManageService {
                 value.setDifficulty(exam.getDifficulty());
                 value.setExamRange(exam.getExamRange());
                 value.setClassRange(exam.getClassRange());
+                //当班级范围不空时，通过中英文；和空格进行分割 获取到班级的编号
+                if(exam.getClassRange() != null){
+                    String[] strings = exam.getClassRange().split(regexClass);
+                    Integer[] classId = new Integer[strings.length];
+                    StringBuilder className = new StringBuilder();
+                    for(int i = 0;i < strings.length;i ++){
+                        classId[i] = UtilInteger.parseInt(strings[i]);
+                        //获取该班级的名称并追加
+                        className.append(classMapper.selectByPrimaryKey(classId[i]).getName());
+                        className.append("；");
+                    }
+                    value.setClassIdRange(classId);
+                    value.setClassNameRange(className.toString());
+                }
                 value.setCurriculumId(exam.getCurriculumId());
                 value.setCurriculumName(curriculumMapper.selectByPrimaryKey(exam.getCurriculumId()).getName());
                 examList.add(value);
@@ -717,6 +778,27 @@ public class AssessManageImpl implements IAssessManageService {
             responseBean.setCode("500");
         }
         return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 查询课程的各个题型的问题数量
+     * @Author ZX
+     * @Date 19:29 2020/5/13
+     * @param [dataInfoDto]
+     * curriculumId:课程编号
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
+     */
+    public Map<Integer, Integer> questionCountByType(DataInfoDto dataInfoDto) {
+        Integer curriculumId = dataInfoDto.getCurriculum();
+        Map<Integer,Integer> info = new HashMap<>();
+        QuestionTypeExample questionTypeExample = new QuestionTypeExample();
+        List<QuestionType> typeList = questionTypeMapper.selectByExample(questionTypeExample);
+        //将每个题型遍历一遍
+        for(QuestionType type : typeList){
+            info.put(type.getId(),questionMapper.countByCurriculum(curriculumId,type.getId()));
+        }
+        return info;
     }
 
 }

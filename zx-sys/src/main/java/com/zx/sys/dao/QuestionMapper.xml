@@ -334,21 +334,58 @@
     limit ${(page - 1) * count},${page * count}
   </select>
 
+  <select id="selectPaginByTeach" resultType="com.zx.sys.model.Question">
+      select *
+      from question q
+               join (
+          select id
+          from curriculum c
+                   join (
+              select distinct curriculum_id
+              from teaching
+              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER} and
+    #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
+          ) t
+                        on t.curriculum_id = c.id
+      ) c
+                    on c.id = q.curriculum_id
+      limit ${(page - 1) * count},${page * count}
+  </select>
+  <select id="countByTeacher" resultType="java.lang.Integer">
+    select count(*)
+    from question q
+           join (
+      select id
+      from curriculum c
+             join (
+        select distinct curriculum_id
+        from teaching
+        where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+      ) t
+                  on t.curriculum_id = c.id
+    ) c
+                on c.id = q.curriculum_id
+  </select>
+
   <update id="updateByInfo">
     update question
-    set type_id = #{record.typeId,jdbcType=INTEGER},
-    stem = #{record.stem,jdbcType=VARCHAR},
-    option_a = #{record.optionA,jdbcType=VARCHAR},
-    option_b = #{record.optionB,jdbcType=VARCHAR},
-    option_c = #{record.optionC,jdbcType=VARCHAR},
-    option_d = #{record.optionD,jdbcType=VARCHAR},
-    answer = #{record.answer,jdbcType=VARCHAR},
-    keyword = #{record.keyword,jdbcType=VARCHAR},
-    curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
-    chapter_id = #{record.chapterId,jdbcType=INTEGER},
-    difficulty = #{record.difficulty,jdbcType=REAL}
+    set type_id       = #{record.typeId,jdbcType=INTEGER},
+        stem          = #{record.stem,jdbcType=VARCHAR},
+        option_a      = #{record.optionA,jdbcType=VARCHAR},
+        option_b      = #{record.optionB,jdbcType=VARCHAR},
+        option_c      = #{record.optionC,jdbcType=VARCHAR},
+        option_d      = #{record.optionD,jdbcType=VARCHAR},
+        answer        = #{record.answer,jdbcType=VARCHAR},
+        keyword       = #{record.keyword,jdbcType=VARCHAR},
+        curriculum_id = #{record.curriculumId,jdbcType=INTEGER},
+        chapter_id    = #{record.chapterId,jdbcType=INTEGER},
+        difficulty    = #{record.difficulty,jdbcType=REAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+  <select id="countByCurriculum" resultType="java.lang.Integer">
+    select count(*)
+    from question
+    where curriculum_id = #{curriculumId,jdbcType=INTEGER} and type_id = #{typeId,jdbcType=INTEGER}
+  </select>
 
 </mapper>

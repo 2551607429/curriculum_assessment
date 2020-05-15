@@ -43,7 +43,7 @@ public class SysController {
      * @Author ZX
      * @Description 获取班级数据
      * @Date 18:30 2020/3/24
-     * @param []
+     * @param dataInfoDto
      * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
      */
     public Map<Integer, Class> classInfo(){

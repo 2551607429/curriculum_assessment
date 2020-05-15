@@ -513,8 +513,8 @@ public class AdminController {
      * @param []
      * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Curriculum>
      */
-    public Map<Integer, Curriculum> curriculumInfo(){
-        return iUserManageService.curriculumInfo();
+    public Map<Integer, Curriculum> curriculumInfo(@RequestBody DataInfoDto dataInfoDto){
+        return iUserManageService.curriculumInfo(dataInfoDto);
     }
 
     @PostMapping("/teaching_info")

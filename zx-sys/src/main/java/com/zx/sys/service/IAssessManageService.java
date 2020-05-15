@@ -6,6 +6,7 @@ import com.zx.sys.dto.ExamInfoDto;
 import com.zx.sys.dto.LoginInputDto;
 import com.zx.sys.dto.QuestionInfoDto;
 import com.zx.sys.model.Chapter;
+import com.zx.sys.model.Class;
 import com.zx.sys.model.Curriculum;
 import com.zx.sys.model.QuestionType;
 
@@ -206,6 +207,15 @@ public interface IAssessManageService {
     Map<Integer, Chapter> chapterInfo();
 
     /**
+     * Description 获取自己任课的所有班级信息
+     * @Author ZX
+     * @Date 15:03 2020/3/24
+     * @param dataInfoDto
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    Map<Integer, Class> classInfo(DataInfoDto dataInfoDto);
+
+    /**
      * Description 增加考试信息
      * @Author ZX
      * @Date 21:47 2020/5/11
@@ -241,6 +251,13 @@ public interface IAssessManageService {
      */
     ResponseBean editExam(ExamInfoDto examInfoDto);
 
-
+    /**
+     * Description 查询课程的各个题型的问题数量
+     * @Author ZX
+     * @Date 19:26 2020/5/13
+     * @param dataInfoDto
+     * @return
+     */
+    Map<Integer, Integer> questionCountByType(DataInfoDto dataInfoDto);
 
 }

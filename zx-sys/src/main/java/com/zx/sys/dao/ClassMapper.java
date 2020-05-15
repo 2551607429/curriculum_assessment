@@ -49,4 +49,10 @@ public interface ClassMapper {
      */
     List<Class> selectPagination(@Param("page")Integer page, @Param("count")Integer count);
 
+    /**
+     * 根据教师编号查询任课的班级
+     * @param teacherId 教师编号
+     * @return
+     */
+    List<Class> selectByTeacher(@Param("teacherId")Integer teacherId);
 }

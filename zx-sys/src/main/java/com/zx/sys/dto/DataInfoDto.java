@@ -47,6 +47,11 @@ public class DataInfoDto {
     private Integer[] curriculumId;
 
     /**
+     * 课程编号
+     */
+    private Integer curriculum;
+
+    /**
      * classId:班级编号
      */
     private Integer[] classId;

@@ -10,74 +10,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b936b5f1-b20d-45c6-ad35-7f7583195528" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dto/ExamInfoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/19a0c6f0-6026-46f7-a7c5-22125cd60742.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/19a0c6f0-6026-46f7-a7c5-22125cd60742.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-common/src/main/java/com/zx/common/enums/ResponseBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-common/src/main/java/com/zx/common/enums/ResponseBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/SysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/SysController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/controller/TeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AchievementMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AchievementMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AdminMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AdminMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AnswerPaperMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/AnswerPaperMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ChapterMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ChapterMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CollegeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CollegeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/KnowledgeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/KnowledgeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/NoticeLogMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/NoticeLogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/NoticeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/NoticeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionTypeMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionTypeMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/RegistrationKeyMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/RegistrationKeyMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/StudentMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/StudentMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/StudyMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/StudyMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/TeacherMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/TeacherMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/TeachingMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/TeachingMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/model/Exam.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/model/ExamExample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/model/Question.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/model/QuestionExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ChapterMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ChapterMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ClassMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/CurriculumMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/ExamMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dao/QuestionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dto/DataInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dto/DataInfoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dto/ExamInfoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/dto/ExamInfoDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/IAssessManageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/IAssessManageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/IUserManageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/IUserManageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/AccountServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/AssessManageImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/AssessManageImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/UserManageImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/src/main/java/com/zx/sys/service/impl/UserManageImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/AdminController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/TeacherController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ExamMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/TeacherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/controller/TeacherController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ChapterMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ChapterMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ClassMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ClassMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ClassMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/CurriculumMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/CurriculumMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/CurriculumMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/CurriculumMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ExamMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ExamMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ExamMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/ExamMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/QuestionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/QuestionMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/QuestionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dao/QuestionMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/Exam.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criterion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$GeneratedCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dto/DataInfoDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/dto/DataInfoDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/Exam.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/Exam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criteria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criterion.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$Criterion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$GeneratedCriteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/ExamExample$GeneratedCriteria.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/Question.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/Question.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$Criteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$Criteria.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$Criterion.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$Criterion.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$GeneratedCriteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/model/QuestionExample$GeneratedCriteria.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/IAssessManageService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/impl/AssessManageImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/IAssessManageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/IAssessManageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/IUserManageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/IUserManageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/impl/AssessManageImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/impl/AssessManageImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/impl/UserManageImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/target/classes/com/zx/sys/service/impl/UserManageImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zx-web/src/main/java/com/zx/web/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/zx-web/src/main/java/com/zx/web/WebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zx-sys/zx-sys.iml" beforeDir="false" afterPath="$PROJECT_DIR$/zx-sys/zx-sys.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zx-web/target/classes/com/zx/web/WebApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/zx-web/target/classes/com/zx/web/WebApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,6 +147,7 @@
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="importAutomatically" value="true" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
@@ -200,8 +182,8 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
+    <property name="project.structure.side.proportion" value="0.21828908" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -223,7 +205,7 @@
     <treeState>
       <expand>
         <path>
-          <item name="Found 62 services " type="fcff1e1b:RestServiceStructure$RootNode" />
+          <item name="Found 71 services " type="fcff1e1b:RestServiceStructure$RootNode" />
         </path>
       </expand>
       <select />
@@ -407,6 +389,11 @@
       <workItem from="1589179419533" duration="18365000" />
       <workItem from="1589245250908" duration="9008000" />
       <workItem from="1589264531504" duration="17189000" />
+      <workItem from="1589296696989" duration="630000" />
+      <workItem from="1589330360476" duration="15635000" />
+      <workItem from="1589359323530" duration="9753000" />
+      <workItem from="1589436523707" duration="31000" />
+      <workItem from="1589511628171" duration="2860000" />
     </task>
     <task id="LOCAL-00001" summary="郭继康 类新建">
       <created>1558316100697</created>
@@ -660,7 +647,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589115074123</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="增加题库管理和考试管理">
+      <created>1589297085730</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1589297085731</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -733,17 +727,19 @@
     <MESSAGE value="郭继康 核心模块编写 配置文件整理" />
     <MESSAGE value="系统配置模块编写" />
     <MESSAGE value="整理不需要的文件夹" />
-    <option name="LAST_COMMIT_MESSAGE" value="整理不需要的文件夹" />
+    <MESSAGE value="增加题库管理和考试管理" />
+    <MESSAGE value="更新教师部分功能实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新教师部分功能实现" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="23" key="#Inspections" timestamp="1588774379497">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="23" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1588774379497" />
-    <state x="275" y="23" key="#Project_Structure" timestamp="1585057470440">
+    <state x="275" y="23" key="#Project_Structure" timestamp="1589513418977">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="23" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1585057470440" />
+    <state x="275" y="23" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1589513418977" />
     <state x="275" y="23" key="#SQL_Dialects" timestamp="1588771952573">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -752,10 +748,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="46" y="16" width="1284" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1589249720411" />
-    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser" timestamp="1589290991593">
+    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser" timestamp="1589369375758">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1589290991593" />
+    <state x="488" y="74" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1589369375758" />
     <state x="412" y="147" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588773389962">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -768,10 +764,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1589290477316" />
-    <state x="215" y="0" key="CommitChangelistDialog2" timestamp="1589115051317">
+    <state x="215" y="0" key="CommitChangelistDialog2" timestamp="1589518843756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="215" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589115051317" />
+    <state x="215" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589518843756" />
     <state width="480" height="466" key="DebuggerActiveHint" timestamp="1589200373522">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -789,78 +785,78 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="502" y="262" key="GitRewordDialog/0.0.1366.728@0.0.1366.728" timestamp="1588992039568" />
-    <state width="1325" height="244" key="GridCell.Tab.0.bottom" timestamp="1589296626270">
+    <state width="1325" height="264" key="GridCell.Tab.0.bottom" timestamp="1589384349906">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.bottom/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515904" />
     <state width="1323" height="215" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922187" />
-    <state width="1325" height="244" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589296626270" />
-    <state width="1325" height="244" key="GridCell.Tab.0.center" timestamp="1589296626269">
+    <state width="1325" height="264" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589384349906" />
+    <state width="1325" height="264" key="GridCell.Tab.0.center" timestamp="1589384349906">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.center/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515903" />
     <state width="1323" height="215" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922186" />
-    <state width="1325" height="244" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589296626269" />
-    <state width="1325" height="244" key="GridCell.Tab.0.left" timestamp="1589296626268">
+    <state width="1325" height="264" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589384349906" />
+    <state width="1325" height="264" key="GridCell.Tab.0.left" timestamp="1589384349906">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.left/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515903" />
     <state width="1323" height="215" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922186" />
-    <state width="1325" height="244" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589296626268" />
-    <state width="1325" height="244" key="GridCell.Tab.0.right" timestamp="1589296626269">
+    <state width="1325" height="264" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589384349906" />
+    <state width="1325" height="264" key="GridCell.Tab.0.right" timestamp="1589384349906">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.right/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515904" />
     <state width="1323" height="215" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922186" />
-    <state width="1325" height="244" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589296626269" />
-    <state width="1325" height="264" key="GridCell.Tab.1.bottom" timestamp="1589296626251">
+    <state width="1325" height="264" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589384349906" />
+    <state width="1325" height="264" key="GridCell.Tab.1.bottom" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.1.bottom/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515905" />
     <state width="1323" height="215" key="GridCell.Tab.1.bottom/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922188" />
-    <state width="1325" height="264" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589296626251" />
-    <state width="1325" height="264" key="GridCell.Tab.1.center" timestamp="1589296626250">
+    <state width="1325" height="264" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.1.center" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.1.center/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515905" />
     <state width="1323" height="215" key="GridCell.Tab.1.center/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922187" />
-    <state width="1325" height="264" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1589296626250" />
-    <state width="1325" height="264" key="GridCell.Tab.1.left" timestamp="1589296626250">
+    <state width="1325" height="264" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.1.left" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.1.left/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515904" />
     <state width="1323" height="215" key="GridCell.Tab.1.left/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922187" />
-    <state width="1325" height="264" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1589296626250" />
-    <state width="1325" height="264" key="GridCell.Tab.1.right" timestamp="1589296626251">
+    <state width="1325" height="264" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.1.right" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.1.right/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515905" />
     <state width="1323" height="215" key="GridCell.Tab.1.right/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922188" />
-    <state width="1325" height="264" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1589296626251" />
-    <state width="1325" height="264" key="GridCell.Tab.2.bottom" timestamp="1589290555340">
+    <state width="1325" height="264" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.2.bottom" timestamp="1589384349908">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.2.bottom/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515906" />
     <state width="1323" height="215" key="GridCell.Tab.2.bottom/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922189" />
-    <state width="1325" height="264" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589290555340" />
-    <state width="1325" height="264" key="GridCell.Tab.2.center" timestamp="1589290555340">
+    <state width="1325" height="264" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589384349908" />
+    <state width="1325" height="264" key="GridCell.Tab.2.center" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.2.center/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515906" />
     <state width="1323" height="215" key="GridCell.Tab.2.center/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922188" />
-    <state width="1325" height="264" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1589290555340" />
-    <state width="1325" height="264" key="GridCell.Tab.2.left" timestamp="1589290555340">
+    <state width="1325" height="264" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.2.left" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.2.left/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515905" />
     <state width="1323" height="215" key="GridCell.Tab.2.left/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922188" />
-    <state width="1325" height="264" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1589290555340" />
-    <state width="1325" height="264" key="GridCell.Tab.2.right" timestamp="1589290555340">
+    <state width="1325" height="264" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
+    <state width="1325" height="264" key="GridCell.Tab.2.right" timestamp="1589384349907">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.2.right/0.0.1366.728/-1920.0.1280.760@0.0.1366.728" timestamp="1588431515906" />
     <state width="1323" height="215" key="GridCell.Tab.2.right/0.0.1366.728/1366.0.1280.760@0.0.1366.728" timestamp="1588496922189" />
-    <state width="1325" height="264" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1589290555340" />
+    <state width="1325" height="264" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1589384349907" />
     <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1588771537252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -869,14 +865,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="254" y="29" key="Registry/0.0.1366.728@0.0.1366.728" timestamp="1585046403600" />
-    <state x="53" y="13" width="1254" height="715" key="SettingsEditor" timestamp="1589200815553">
+    <state x="53" y="13" width="1254" height="715" key="SettingsEditor" timestamp="1589513718042">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="53" y="13" width="1254" height="715" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1589200815553" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1589115109603">
+    <state x="53" y="13" width="1254" height="715" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1589513718042" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1589297123446">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589115109603" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589297123446" />
     <state width="691" height="372" key="XDebugger.FullValuePopup" timestamp="1587906870606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -893,22 +889,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="129" key="extract.method.dialog/0.0.1366.728@0.0.1366.728" timestamp="1584287646654" />
-    <state x="359" y="97" width="647" height="534" key="find.popup" timestamp="1588256538398">
+    <state x="359" y="97" width="647" height="534" key="find.popup" timestamp="1589350849913">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="359" y="97" width="647" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1588256538398" />
+    <state x="359" y="97" width="647" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1589350849913" />
     <state x="115" y="58" key="new project wizard" timestamp="1585058021053">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="115" y="58" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1585058021053" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1587910486168">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1589338843338">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1587910486168" />
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1589274108138">
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1589338843338" />
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1589370628471">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589274108138" />
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589370628471" />
     <state x="405" y="276" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1584287534205">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -3,15 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/curriculum_assessment.iml" filepath="$PROJECT_DIR$/curriculum_assessment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-ac/dsa-ac.iml" filepath="$PROJECT_DIR$/dsa-ac/dsa-ac.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-as/dsa-as.iml" filepath="$PROJECT_DIR$/dsa-as/dsa-as.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-common/dsa-common.iml" filepath="$PROJECT_DIR$/dsa-common/dsa-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-core/dsa-core.iml" filepath="$PROJECT_DIR$/dsa-core/dsa-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-key/dsa-key.iml" filepath="$PROJECT_DIR$/dsa-key/dsa-key.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-security/dsa-security.iml" filepath="$PROJECT_DIR$/dsa-security/dsa-security.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-sys/dsa-sys.iml" filepath="$PROJECT_DIR$/dsa-sys/dsa-sys.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-utils/dsa-utils.iml" filepath="$PROJECT_DIR$/dsa-utils/dsa-utils.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dsa-web/dsa-web.iml" filepath="$PROJECT_DIR$/dsa-web/dsa-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-common/zx-common.iml" filepath="$PROJECT_DIR$/zx-common/zx-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-config/zx-config.iml" filepath="$PROJECT_DIR$/zx-config/zx-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/zx-security/zx-security.iml" filepath="$PROJECT_DIR$/zx-security/zx-security.iml" />

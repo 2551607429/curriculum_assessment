@@ -219,21 +219,34 @@
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.5.0</version>
                 <configuration>
+<!--                    本地部署-->
                     <container>
                         <containerId>tomcat8x</containerId>
-                        <type>remote</type>
+                        <home>D://apache-tomcat-8.5.51</home>
                     </container>
                     <configuration>
-                        <type>runtime</type>
+                        <type>standalone</type>  //existing 将项目部署到现有的Web容器中
+                        <home>${project.build.directory}/tomcat8x</home>
                         <properties>
-                            <cargo.protocol>http</cargo.protocol>
-                            <cargo.hostname>47.232.139.221</cargo.hostname>
-                            <cargo.servlet.port>8080</cargo.servlet.port>
-                            <cargo.remote.username>admin</cargo.remote.username>
-                            <cargo.remote.password>admin</cargo.remote.password>
-                            <cargo.remote.uri>http://47.232.139.221:8080/manager</cargo.remote.uri>
+                            <cargo.server.port>8081</cargo.server.port>
                         </properties>
                     </configuration>
+<!--                    远程部署-->
+<!--                    <container>-->
+<!--                        <containerId>tomcat8x</containerId>-->
+<!--                        <type>remote</type>-->
+<!--                    </container>-->
+<!--                    <configuration>-->
+<!--                        <type>runtime</type>-->
+<!--                        <properties>-->
+<!--                            <cargo.protocol>http</cargo.protocol>-->
+<!--                            <cargo.hostname>47.232.139.221</cargo.hostname>-->
+<!--                            <cargo.servlet.port>8080</cargo.servlet.port>-->
+<!--                            <cargo.remote.username>admin</cargo.remote.username>-->
+<!--                            <cargo.remote.password>admin</cargo.remote.password>-->
+<!--                            <cargo.remote.uri>http://47.232.139.221:8080/manager</cargo.remote.uri>-->
+<!--                        </properties>-->
+<!--                    </configuration>-->
                 </configuration>
             </plugin>
             <!--热部署-->

@@ -7,20 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dsa-sys" />
         <module name="zx-utils" />
         <module name="zx-security" />
-        <module name="dsa-ac" />
-        <module name="dsa-core" />
-        <module name="dsa-web" />
-        <module name="dsa-utils" />
-        <module name="dsa-key" />
         <module name="zx-sys" />
         <module name="zx-common" />
-        <module name="dsa-security" />
-        <module name="dsa-common" />
         <module name="zx-web" />
-        <module name="dsa-as" />
         <module name="zx-config" />
       </profile>
     </annotationProcessing>

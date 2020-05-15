@@ -112,7 +112,7 @@ public class AccountServiceImpl implements IAccountService {
      * @Author ZX
      * @Description 获取注册时的班级数据
      * @Date 15:03 2020/3/24
-     * @param []
+     * @param
      * @return java.util.Map<java.lang.String,java.lang.Object>
      */
     public Map<Integer,Class> classInfo() {

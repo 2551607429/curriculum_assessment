@@ -2,9 +2,11 @@ package com.zx.sys.controller;
 
 import com.zx.common.enums.ResponseBean;
 import com.zx.sys.dto.DataInfoDto;
+import com.zx.sys.dto.ExamInfoDto;
 import com.zx.sys.dto.QuestionInfoDto;
 import com.zx.sys.dto.TeachingInfoDto;
 import com.zx.sys.model.Chapter;
+import com.zx.sys.model.Class;
 import com.zx.sys.model.Curriculum;
 import com.zx.sys.model.QuestionType;
 import com.zx.sys.service.IAssessManageService;
@@ -31,6 +33,9 @@ public class TeacherController {
 
     @Autowired
     private IAssessManageService iAssessManageService;
+
+    @Autowired
+    private IUserManageService iUserManageService;
 
 
     @PostMapping("/add_question")
@@ -119,5 +124,89 @@ public class TeacherController {
         return iAssessManageService.chapterInfo();
     }
 
+    @PostMapping("/add_exam")
+    /**
+     * Description 增加考试信息
+     * @Author ZX
+     * @Date 10:36 2020/5/12
+     * @param [examInfoDto]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean addExam(@RequestBody ExamInfoDto examInfoDto){
+        return iAssessManageService.addExam(examInfoDto);
+    }
+
+    @PostMapping("/delete_exam")
+    /**
+     * Description 删除考试信息
+     * @Author ZX
+     * @Date 10:37 2020/5/12
+     * @param [dataInfoDto]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean deleteExam(@RequestBody DataInfoDto dataInfoDto){
+        return iAssessManageService.deleteExam(dataInfoDto);
+    }
+
+
+    @PostMapping("/exam_init")
+    /**
+     * Description 分页获取考试列表数据
+     * @Author ZX
+     * @Date 10:37 2020/5/12
+     * @param [dataInfoDto]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public Map<String,Object> examInit(@RequestBody DataInfoDto dataInfoDto){
+        return iAssessManageService.examInit(dataInfoDto);
+    }
+
+    @PostMapping("/edit_exam")
+    /**
+     * Description 修改考试信息
+     * @Author ZX
+     * @Date 10:37 2020/5/12
+     * @param [examInfoDto]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean esdiExam(@RequestBody ExamInfoDto examInfoDto){
+        return iAssessManageService.editExam(examInfoDto);
+    }
+
+    @PostMapping("/curriculum_info")
+    /**
+     * Description 获取自己任课的所有课程信息
+     * @Author ZX
+     * @Date 10:13 2020/5/13
+     * @param [dataInfoDto]
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Curriculum>
+     */
+    public Map<Integer, Curriculum> curriculumInfo(@RequestBody DataInfoDto dataInfoDto){
+        return iUserManageService.curriculumInfo(dataInfoDto);
+    }
+
+    @PostMapping("/class_info")
+    /**
+     * Description 获取自己任课的所有班级信息
+     * @Author ZX
+     * @Date 15:18 2020/5/13
+     * @param [dataInfoDto]
+     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
+     */
+    public Map<Integer, Class> classInfo(@RequestBody DataInfoDto dataInfoDto){
+        return iAssessManageService.classInfo(dataInfoDto);
+    }
+
+    @PostMapping("/question_count_type")
+    /**
+     * Description 查询课程的各个题型的问题数量
+     * @Author ZX
+     * @Date 19:49 2020/5/13
+     * @param dataInfoDto
+     * @return
+     */
+    public Map<Integer, Integer> questionCountByType(@RequestBody DataInfoDto dataInfoDto){
+        return iAssessManageService.questionCountByType(dataInfoDto);
+    }
 
 }

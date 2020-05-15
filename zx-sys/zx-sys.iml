@@ -26,7 +26,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="zx-common" />
-    <orderEntry type="module" module-name="zx-common" />
     <orderEntry type="module" module-name="zx-utils" />
     <orderEntry type="module" module-name="zx-config" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE" level="project" />

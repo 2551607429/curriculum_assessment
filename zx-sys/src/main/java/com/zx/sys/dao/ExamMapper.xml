@@ -286,6 +286,24 @@
     limit ${(page - 1) * count},${page * count}
   </select>
 
+  <select id="selectPaginByteach" resultMap="BaseResultMap">
+      select *
+      from exam e
+               join (
+          select id
+          from curriculum c
+                   join (
+              select distinct curriculum_id
+              from teaching
+              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+                and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
+          ) t
+                        on t.curriculum_id = c.id
+      ) c
+                    on c.id = e.curriculum_id
+      limit ${(page - 1) * count},${page * count}
+  </select>
+
   <update id="updateByInfo">
     update exam
     set name = #{record.name,jdbcType=VARCHAR},
@@ -298,5 +316,4 @@
     curriculum_id = #{record.curriculumId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
 </mapper>

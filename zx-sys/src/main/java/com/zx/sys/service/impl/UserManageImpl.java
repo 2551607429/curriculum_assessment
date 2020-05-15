@@ -540,15 +540,27 @@ public class UserManageImpl implements IUserManageService {
      * Description 获取所有的课程信息
      * @Author ZX
      * @Date 21:51 2020/5/8
-     * @param []
+     * @param dataInfoDto
      * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Curriculum>
      */
-    public Map<Integer, Curriculum> curriculumInfo() {
+    public Map<Integer, Curriculum> curriculumInfo(DataInfoDto dataInfoDto) {
         Map<Integer, Curriculum> info = new HashMap<>();
-        CurriculumExample curriculumExample = new CurriculumExample();
-        List<Curriculum> list = curriculumMapper.selectByExample(curriculumExample);
-        for(Curriculum cu : list){
-            info.put(cu.getId(),cu);
+        //当管理员获取课程时，为全部信息
+        if(dataInfoDto.getOption() == 3){
+            CurriculumExample curriculumExample = new CurriculumExample();
+            List<Curriculum> list = curriculumMapper.selectByExample(curriculumExample);
+            for(Curriculum cu : list){
+                info.put(cu.getId(),cu);
+            }
+        }
+        //当教师获取课程时，只能获取自己教授的课程
+        else if(dataInfoDto.getOption() == 2){
+            Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
+            Date date = new Date();
+            List<Curriculum> list = curriculumMapper.selectByTeacher(date,teacher.getId());
+            for(Curriculum cu : list){
+                info.put(cu.getId(),cu);
+            }
         }
         return info;
     }

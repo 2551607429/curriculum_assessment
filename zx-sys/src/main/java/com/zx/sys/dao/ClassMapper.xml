@@ -210,4 +210,14 @@
     limit ${(page - 1) * count},${page * count}
   </select>
 
+  <select id="selectByTeacher" resultType="com.zx.sys.model.Class">
+    select *
+    from class c
+           join (
+      select distinct class_id
+      from teaching
+      where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}) t
+                on t.class_id = c.id
+  </select>
+
 </mapper>

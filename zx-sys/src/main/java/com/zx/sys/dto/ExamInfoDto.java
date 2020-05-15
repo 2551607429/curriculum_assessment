@@ -3,6 +3,7 @@ package com.zx.sys.dto;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName ExamInfoDto
@@ -20,6 +21,8 @@ public class ExamInfoDto {
     private Date startTime;
 
     private Date endTime;
+
+    private List<Date> examTime;
 
     /**
      * 考试总分
@@ -40,6 +43,10 @@ public class ExamInfoDto {
      * 参加考试班级范围：当考试范围是2时，输入该信息，班级编号之间以；隔开
      */
     private String classRange;
+
+    private Integer[] classIdRange;
+
+    private String classNameRange;
 
     private Integer curriculumId;
 

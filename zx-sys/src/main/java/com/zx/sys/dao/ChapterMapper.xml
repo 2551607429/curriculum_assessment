@@ -173,5 +173,4 @@
     from chapter
     limit ${(page - 1) * count},${page * count}
   </select>
-
 </mapper>
