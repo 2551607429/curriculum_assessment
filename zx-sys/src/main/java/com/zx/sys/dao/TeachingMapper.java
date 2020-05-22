@@ -6,8 +6,10 @@ import com.zx.sys.model.Teaching;
 import com.zx.sys.model.TeachingExample;
 import com.zx.sys.model.TeachingKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface TeachingMapper {
     int countByExample(TeachingExample example);
 

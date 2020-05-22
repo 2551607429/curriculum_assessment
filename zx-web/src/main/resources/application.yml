@@ -15,7 +15,7 @@ spring:
     #账号密码
     username: root
     password: 123456
-    url: jdbc:mysql://49.232.139.221:3306/curriculum_assessment?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/db_curriculum_assessment?useUnicode=true&characterEncoding=utf-8
     # 使用druid数据源连接池
     type: com.alibaba.druid.pool.DruidDataSource
     #驱动

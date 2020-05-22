@@ -2,10 +2,14 @@ package com.zx.sys.dao;
 
 import com.zx.sys.model.Class;
 import com.zx.sys.model.ClassExample;
+
+import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface ClassMapper {
     int countByExample(ClassExample example);
 
@@ -50,9 +54,21 @@ public interface ClassMapper {
     List<Class> selectPagination(@Param("page")Integer page, @Param("count")Integer count);
 
     /**
-     * 根据教师编号查询任课的班级
+     * 根据教师编号查询任课的全部班级
      * @param teacherId 教师编号
+     * @param date 当前时间
      * @return
      */
-    List<Class> selectByTeacher(@Param("teacherId")Integer teacherId);
+    List<Class> selectByTeacher(@Param("teacherId")Integer teacherId, @Param("date") Date date);
+
+    /**
+     * 根据教师编号查询 某一课程任课的全部班级
+     * @param teacherId 教师编号
+     * @param date 当前时间
+     * @param curriculumId 课程编号
+     * @return
+     */
+    List<Class> selectByCurriculum(@Param("teacherId")Integer teacherId,
+                                   @Param("date") Date date,
+                                   @Param("curriculumId")Integer curriculumId);
 }

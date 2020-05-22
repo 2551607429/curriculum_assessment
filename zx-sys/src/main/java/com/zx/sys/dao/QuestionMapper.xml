@@ -338,33 +338,23 @@
       select *
       from question q
                join (
-          select id
-          from curriculum c
-                   join (
-              select distinct curriculum_id
-              from teaching
-              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER} and
-    #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
-          ) t
-                        on t.curriculum_id = c.id
+          select distinct curriculum_id
+          from teaching
+          where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+            and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
       ) c
-                    on c.id = q.curriculum_id
+                    on c.curriculum_id = q.curriculum_id
       limit ${(page - 1) * count},${page * count}
   </select>
   <select id="countByTeacher" resultType="java.lang.Integer">
     select count(*)
     from question q
            join (
-      select id
-      from curriculum c
-             join (
         select distinct curriculum_id
         from teaching
         where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
-      ) t
-                  on t.curriculum_id = c.id
-    ) c
-                on c.id = q.curriculum_id
+      )c
+                on c.curriculum_id = q.curriculum_id
   </select>
 
   <update id="updateByInfo">
@@ -387,5 +377,18 @@
     from question
     where curriculum_id = #{curriculumId,jdbcType=INTEGER} and type_id = #{typeId,jdbcType=INTEGER}
   </select>
-
+  <select id="selectAllByType" resultType="java.lang.Integer">
+      select q.id
+      from question q
+               join (
+              select distinct curriculum_id
+              from teaching
+              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+                and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
+          )c
+                    on c.curriculum_id = q.curriculum_id and q.type_id = #{typeId,jdbcType=INTEGER}
+                        and (q.difficulty = #{difficulty,jdbcType=FLOAT} or q.difficulty = ${difficulty + 1})
+      order by RAND()
+      limit #{count,jdbcType=INTEGER}
+  </select>
 </mapper>

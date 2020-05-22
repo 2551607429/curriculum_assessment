@@ -3,9 +3,13 @@ package com.zx.sys.dao;
 import com.zx.sys.dto.UserInfoDto;
 import com.zx.sys.model.Teacher;
 import com.zx.sys.model.TeacherExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface TeacherMapper {
     int countByExample(TeacherExample example);
 

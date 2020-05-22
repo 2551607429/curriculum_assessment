@@ -225,4 +225,13 @@
       and question_id = #{questionId,jdbcType=INTEGER}
       and stu_id = #{stuId,jdbcType=INTEGER}
   </update>
+  <select id="selectPaper" resultMap="BaseResultMap">
+      select a.*
+      from answer_paper a
+               join question q
+                    on q.id = a.question_id
+      where a.exam_id = #{examId,jdbcType=INTEGER}
+        and a.stu_id = #{stuId,jdbcType=INTEGER}
+      ORDER BY type_id
+  </select>
 </mapper>

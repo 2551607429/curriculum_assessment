@@ -5,8 +5,9 @@ import com.zx.sys.model.Admin;
 import com.zx.sys.model.AdminExample;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface AdminMapper {
     int countByExample(AdminExample example);
 

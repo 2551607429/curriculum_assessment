@@ -169,7 +169,7 @@ public class TeacherController {
      * @param [examInfoDto]
      * @return com.zx.common.enums.ResponseBean
      */
-    public ResponseBean esdiExam(@RequestBody ExamInfoDto examInfoDto){
+    public ResponseBean editExam(@RequestBody ExamInfoDto examInfoDto){
         return iAssessManageService.editExam(examInfoDto);
     }
 

@@ -28,19 +28,25 @@ public class AssessManageImpl implements IAssessManageService {
     private TeacherMapper teacherMapper;
 
     @Autowired
+    private StudentMapper studentMapper;
+
+    @Autowired
     private QuestionTypeMapper questionTypeMapper;
 
     @Autowired
     private CurriculumMapper curriculumMapper;
 
     @Autowired
-    private ChapterMapper chapterMapper ;
+    private ChapterMapper chapterMapper;
 
     @Autowired
     private QuestionMapper questionMapper;
 
     @Autowired
     private ExamMapper examMapper;
+
+    @Autowired
+    private AnswerPaperMapper answerPaperMapper;
 
     @Autowired
     private ClassMapper classMapper;
@@ -63,9 +69,9 @@ public class AssessManageImpl implements IAssessManageService {
         String username = loginInputDto.getUsername();
         Integer option = loginInputDto.getOption();
         List<QuestionType> list = new ArrayList<>();
-        if(option == 3){
+        if (option == 3) {
             Admin admin = adminMapper.selectByUserName(username);
-            if(admin != null){
+            if (admin != null) {
                 QuestionTypeExample example = new QuestionTypeExample();
                 list = questionTypeMapper.selectByExample(example);
             }
@@ -107,10 +113,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean deleteType(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
-        Integer [] typeId = dataInfoDto.getId();
+        Integer[] typeId = dataInfoDto.getId();
         ResponseBean responseBean = new ResponseBean();
-        if(option == 3){
-            for(Integer id : typeId){
+        if (option == 3) {
+            for (Integer id : typeId) {
                 questionTypeMapper.deleteByPrimaryKey(id);
                 responseBean.setCode("200");
                 responseBean.setMsg("删除成功");
@@ -188,12 +194,11 @@ public class AssessManageImpl implements IAssessManageService {
         UploadInfoDto upload = new UploadInfoDto();
         List<Curriculum> failList = new ArrayList<>();
         try {
-            for(Curriculum curr : list){
+            for (Curriculum curr : list) {
                 res = addCurriculum(curr);
-                if("200".equals(res.getCode())) {
+                if ("200".equals(res.getCode())) {
                     successCount++;
-                }
-                else{
+                } else {
                     failCount++;
                     failList.add(curr);
                 }
@@ -226,10 +231,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean deleteCurriculum(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
-        Integer [] curriculumId = dataInfoDto.getId();
+        Integer[] curriculumId = dataInfoDto.getId();
         ResponseBean responseBean = new ResponseBean();
-        if(option == 3 || option == 2){
-            for(Integer id : curriculumId){
+        if (option == 3 || option == 2) {
+            for (Integer id : curriculumId) {
                 curriculumMapper.deleteByPrimaryKey(id);
                 responseBean.setCode("200");
                 responseBean.setMsg("删除成功");
@@ -252,20 +257,19 @@ public class AssessManageImpl implements IAssessManageService {
      * map:页面课程信息
      * @return java.util.List<com.zx.sys.model.Curriculum>
      */
-    public Map<String,Object> curriculumInit(DataInfoDto dataInfoDto) {
+    public Map<String, Object> curriculumInit(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
-        Map<String,Object> map = new HashMap<>();
-        if(option == 3){
+        Map<String, Object> map = new HashMap<>();
+        if (option == 3) {
             CurriculumExample curriculumExample = new CurriculumExample();
             //查询当前页面显示的课程列表
-            List<Curriculum> list = curriculumMapper.selectPagination(page,count);
-            map.put("list",list);
-            map.put("total",curriculumMapper.countByExample(curriculumExample));
+            List<Curriculum> list = curriculumMapper.selectPagination(page, count);
+            map.put("list", list);
+            map.put("total", curriculumMapper.countByExample(curriculumExample));
             return map;
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -326,10 +330,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean deleteChapter(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
-        Integer [] chapterId = dataInfoDto.getId();
+        Integer[] chapterId = dataInfoDto.getId();
         ResponseBean responseBean = new ResponseBean();
-        if(option == 3){
-            for(Integer id : chapterId){
+        if (option == 3) {
+            for (Integer id : chapterId) {
                 chapterMapper.deleteByPrimaryKey(id);
                 responseBean.setCode("200");
                 responseBean.setMsg("删除成功");
@@ -349,22 +353,21 @@ public class AssessManageImpl implements IAssessManageService {
      * count:每页数量
      * list:获取所选页面的章节列表
      * map:页面章节信息
-     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      */
     public Map<String, Object> chapterInit(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
-        Map<String,Object> map = new HashMap<>();
-        if(option == 3){
+        Map<String, Object> map = new HashMap<>();
+        if (option == 3) {
             ChapterExample chapterExample = new ChapterExample();
             //查询当前页面显示的章节列表
-            List<Chapter> list = chapterMapper.selectPagination(page,count);
-            map.put("list",list);
-            map.put("total",chapterMapper.countByExample(chapterExample));
+            List<Chapter> list = chapterMapper.selectPagination(page, count);
+            map.put("list", list);
+            map.put("total", chapterMapper.countByExample(chapterExample));
             return map;
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -405,35 +408,30 @@ public class AssessManageImpl implements IAssessManageService {
             Question question = new Question();
             question.setTypeId(questionInfoDto.getTypeId());
             question.setStem(questionInfoDto.getStem());
-            if(questionInfoDto.getOptionA() != null){
+            if (questionInfoDto.getOptionA() != null) {
                 question.setOptionA(questionInfoDto.getOptionA());
-            }
-            else{
+            } else {
                 question.setOptionA("");
             }
-            if(questionInfoDto.getOptionB() != null) {
+            if (questionInfoDto.getOptionB() != null) {
                 question.setOptionB(questionInfoDto.getOptionB());
-            }
-            else{
+            } else {
                 question.setOptionB("");
             }
-            if(questionInfoDto.getOptionC() != null) {
+            if (questionInfoDto.getOptionC() != null) {
                 question.setOptionC(questionInfoDto.getOptionC());
-            }
-            else{
+            } else {
                 question.setOptionC("");
             }
-            if(questionInfoDto.getOptionD() != null) {
+            if (questionInfoDto.getOptionD() != null) {
                 question.setOptionD(questionInfoDto.getOptionD());
-            }
-            else{
+            } else {
                 question.setOptionD("");
             }
             question.setAnswer(questionInfoDto.getAnswer());
-            if(questionInfoDto.getKeyword() != null) {
+            if (questionInfoDto.getKeyword() != null) {
                 question.setKeyword(questionInfoDto.getKeyword());
-            }
-            else{
+            } else {
                 question.setKeyword("");
             }
             question.setCurriculumId(questionInfoDto.getCurriculumId());
@@ -442,8 +440,7 @@ public class AssessManageImpl implements IAssessManageService {
             questionMapper.insertSelective(question);
             responseBean.setCode("200");
             responseBean.setMsg("增加成功");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             responseBean.setCode("500");
             responseBean.setMsg("增加失败");
@@ -475,10 +472,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean deleteQuestion(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
-        Integer [] questionId = dataInfoDto.getId();
+        Integer[] questionId = dataInfoDto.getId();
         ResponseBean responseBean = new ResponseBean();
-        if(option == 2){
-            for(Integer id : questionId){
+        if (option == 2) {
+            for (Integer id : questionId) {
                 questionMapper.deleteByPrimaryKey(id);
                 responseBean.setCode("200");
                 responseBean.setMsg("删除成功");
@@ -498,30 +495,30 @@ public class AssessManageImpl implements IAssessManageService {
      * count:每页数量
      * list:获取所选页面的题库列表
      * map:页面题库信息
-     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      */
     public Map<String, Object> questionInit(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         List<Question> list = new ArrayList<>();
         List<QuestionInfoDto> questionList = new ArrayList<>();
         //当是管理员时
-        if(option == 3){
+        if (option == 3) {
             QuestionExample questionExample = new QuestionExample();
             //查询当前页面显示的题库题目列表
-            list = questionMapper.selectPagination(page,count);
-            map.put("total",questionMapper.countByExample(questionExample));
+            list = questionMapper.selectPagination(page, count);
+            map.put("total", questionMapper.countByExample(questionExample));
         }
         //当时教师时
-        else if(option == 2){
+        else if (option == 2) {
             Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
             Date date = new Date();
             //查询当前页面显示的自己任课信息的题库题目列表
-            list = questionMapper.selectPaginByTeach(date,teacher.getId(),page,count);
+            list = questionMapper.selectPaginByTeach(date, teacher.getId(), page, count);
             questionList = new ArrayList<>();
-            map.put("total",questionMapper.countByTeacher(teacher.getId()));
+            map.put("total", questionMapper.countByTeacher(teacher.getId()));
         }
         //对每个题库题目信息增加内容
         for (Question question : list) {
@@ -543,7 +540,7 @@ public class AssessManageImpl implements IAssessManageService {
             value.setDifficulty(question.getDifficulty());
             questionList.add(value);
         }
-        map.put("list",questionList);
+        map.put("list", questionList);
         return map;
     }
 
@@ -558,7 +555,7 @@ public class AssessManageImpl implements IAssessManageService {
     public ResponseBean editQuestion(QuestionInfoDto questionInfoDto) {
         ResponseBean responseBean = new ResponseBean();
         try {
-            questionMapper.updateByInfo(questionInfoDto,questionInfoDto.getId());
+            questionMapper.updateByInfo(questionInfoDto, questionInfoDto.getId());
             responseBean.setMsg("修改成功");
             responseBean.setCode("200");
         } catch (Exception e) {
@@ -575,14 +572,14 @@ public class AssessManageImpl implements IAssessManageService {
      * @Author ZX
      * @Date 16:53 2020/5/12
      * @param []
-     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.QuestionType>
+     * @return java.util.Map<java.lang.Integer, com.zx.sys.model.QuestionType>
      */
     public Map<Integer, QuestionType> typeInfo() {
         Map<Integer, QuestionType> info = new HashMap<>();
         QuestionTypeExample questionTypeExample = new QuestionTypeExample();
         List<QuestionType> list = questionTypeMapper.selectByExample(questionTypeExample);
-        for(QuestionType qu : list){
-            info.put(qu.getId(),qu);
+        for (QuestionType qu : list) {
+            info.put(qu.getId(), qu);
         }
         return info;
     }
@@ -593,14 +590,14 @@ public class AssessManageImpl implements IAssessManageService {
      * @Author ZX
      * @Date 17:04 2020/5/12
      * @param []
-     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Chapter>
+     * @return java.util.Map<java.lang.Integer, com.zx.sys.model.Chapter>
      */
     public Map<Integer, Chapter> chapterInfo() {
         Map<Integer, Chapter> info = new HashMap<>();
         ChapterExample chapterExample = new ChapterExample();
         List<Chapter> list = chapterMapper.selectByExample(chapterExample);
-        for(Chapter ch : list){
-            info.put(ch.getId(),ch);
+        for (Chapter ch : list) {
+            info.put(ch.getId(), ch);
         }
         return info;
     }
@@ -612,22 +609,26 @@ public class AssessManageImpl implements IAssessManageService {
      * @Author ZX
      * @Date 14:43 2020/5/13
      * @param [dataInfoDto]
-     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
+     * @return java.util.Map<java.lang.Integer, com.zx.sys.model.Class>
      */
     public Map<Integer, Class> classInfo(DataInfoDto dataInfoDto) {
-        Map<Integer,Class> info = new HashMap<>();
+        Map<Integer, Class> info = new HashMap<>();
         List<Class> list = new ArrayList<>();
-        //当是教师时，只能获取自己任课的班级
-        if(dataInfoDto.getOption() == 2){
+        //当是教师时，只能获取自己当前任课的班级
+        if (dataInfoDto.getOption() == 2) {
+            Date date = new Date();
             Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
-            list = classMapper.selectByTeacher(teacher.getId());
-        }
-        else if(dataInfoDto.getOption() == 1 || dataInfoDto.getOption() == 3){
+            if (dataInfoDto.getCurriculum() == null || "".equals(dataInfoDto.getCurriculum())) {
+                list = classMapper.selectByTeacher(teacher.getId(), date);
+            } else {
+                list = classMapper.selectByCurriculum(teacher.getId(), date, dataInfoDto.getCurriculum());
+            }
+        } else if (dataInfoDto.getOption() == 1 || dataInfoDto.getOption() == 3) {
             ClassExample classExample = new ClassExample();
             list = classMapper.selectByExample(classExample);
         }
-        for(Class li : list){
-            info.put(li.getId(),li);
+        for (Class li : list) {
+            info.put(li.getId(), li);
         }
         return info;
     }
@@ -645,23 +646,49 @@ public class AssessManageImpl implements IAssessManageService {
         try {
             Exam exam = new Exam();
             exam.setName(examInfoDto.getName());
-            exam.setEndTime(examInfoDto.getEndTime());
-            exam.setStartTime(examInfoDto.getStartTime());
+            exam.setEndTime(examInfoDto.getExamTime().get(1));
+            exam.setStartTime(examInfoDto.getExamTime().get(0));
             exam.setTotalScore(examInfoDto.getTotalScore());
             exam.setDifficulty(examInfoDto.getDifficulty());
             exam.setExamRange(examInfoDto.getExamRange());
             exam.setCurriculumId(examInfoDto.getCurriculumId());
-            if(examInfoDto.getClassRange() != null){
-                exam.setClassRange(examInfoDto.getClassRange());
+            //当参加考试班级范围为 自己选择的班级
+            if (examInfoDto.getExamRange() == 2) {
+                StringBuilder classId = new StringBuilder();
+                for (Integer id : examInfoDto.getClassIdRange()) {
+                    classId.append(id);
+                    classId.append(";");
+                }
+                exam.setClassRange(classId.toString());
             }
-            else{
-                exam.setClassRange("");
+            //当参加考试班级范围为 全部任课学生
+            else {
+                Date date = new Date();
+                Teacher teacher = teacherMapper.selectByUserName(examInfoDto.getUsername());
+                List<Class> classList = classMapper.selectByCurriculum(teacher.getId(), date, examInfoDto.getCurriculumId());
+                StringBuilder classId = new StringBuilder();
+                Integer[] cla = new Integer[classList.size()];
+                for (int i = 0;i < classList.size();i ++) {
+                    Class value = classList.get(i);
+                    cla[i] = value.getId();
+                    classId.append(value.getId());
+                    classId.append(";");
+                }
+                examInfoDto.setClassIdRange(cla);
+                exam.setClassRange(classId.toString());
             }
-            examMapper.insertSelective(exam);
-            responseBean.setCode("200");
-            responseBean.setMsg("增加成功");
-        }
-        catch (Exception e) {
+            int count = examMapper.insertSelective(exam);
+            // 获取到的即为新插入记录的ID
+            examInfoDto.setId(exam.getId());
+            // 创建试卷
+            if ("200".equals(addPaper(examInfoDto).getCode())) {
+                responseBean.setCode("200");
+                responseBean.setMsg("增加成功");
+            } else {
+                responseBean.setCode("500");
+                responseBean.setMsg("增加失败");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             responseBean.setCode("500");
             responseBean.setMsg("增加失败");
@@ -681,10 +708,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean deleteExam(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
-        Integer [] examId = dataInfoDto.getId();
+        Integer[] examId = dataInfoDto.getId();
         ResponseBean responseBean = new ResponseBean();
-        if(option == 2){
-            for(Integer id : examId){
+        if (option == 2) {
+            for (Integer id : examId) {
                 examMapper.deleteByPrimaryKey(id);
                 responseBean.setCode("200");
                 responseBean.setMsg("删除成功");
@@ -705,22 +732,23 @@ public class AssessManageImpl implements IAssessManageService {
      * list:获取所选页面的考试列表
      * map:页面题库信息
      * regexClass:分割班级范围的正则表达式
-     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      */
     public Map<String, Object> examInit(DataInfoDto dataInfoDto) {
         Integer option = dataInfoDto.getOption();
         Integer page = dataInfoDto.getPage();
         Integer count = dataInfoDto.getCount();
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         String regexClass = ";|；|\\s+";
-        if(option == 2){
+        //当为教师时
+        if (option == 2) {
             ExamExample examExample = new ExamExample();
             Teacher teacher = teacherMapper.selectByUserName(dataInfoDto.getUsername());
             Date date = new Date();
             //查询当前页面显示的考试列表
-            List<Exam> list = examMapper.selectPaginByteach(date,teacher.getId(),page,count);
+            List<Exam> list = examMapper.selectPaginByteach(date, teacher.getId(), page, count);
             List<ExamInfoDto> examList = new ArrayList<>();
-            //对每个题库题目信息增加内容
+            //对每个考试信息增加内容
             for (Exam exam : list) {
                 ExamInfoDto value = new ExamInfoDto();
                 value.setId(exam.getId());
@@ -732,11 +760,11 @@ public class AssessManageImpl implements IAssessManageService {
                 value.setExamRange(exam.getExamRange());
                 value.setClassRange(exam.getClassRange());
                 //当班级范围不空时，通过中英文；和空格进行分割 获取到班级的编号
-                if(exam.getClassRange() != null){
+                if (exam.getClassRange() != null && !"".equals(exam.getClassRange())) {
                     String[] strings = exam.getClassRange().split(regexClass);
                     Integer[] classId = new Integer[strings.length];
                     StringBuilder className = new StringBuilder();
-                    for(int i = 0;i < strings.length;i ++){
+                    for (int i = 0; i < strings.length; i++) {
                         classId[i] = UtilInteger.parseInt(strings[i]);
                         //获取该班级的名称并追加
                         className.append(classMapper.selectByPrimaryKey(classId[i]).getName());
@@ -749,11 +777,66 @@ public class AssessManageImpl implements IAssessManageService {
                 value.setCurriculumName(curriculumMapper.selectByPrimaryKey(exam.getCurriculumId()).getName());
                 examList.add(value);
             }
-            map.put("list",examList);
-            map.put("total",examMapper.countByExample(examExample));
+            map.put("list", examList);
+            map.put("total", examMapper.countByExample(examExample));
             return map;
         }
-        else{
+        else if(option == 1){
+            ExamExample examExample = new ExamExample();
+            Student student = studentMapper.selectByUserName(dataInfoDto.getUsername());
+            Date date = new Date();
+            List<Exam> list = new ArrayList<>();
+            //当需要获取当前尚未考试信息时
+            if(dataInfoDto.getKey() == 1){
+                //查询当前页面显示的考试列表
+                list = examMapper.unSelectPaginByStudent(date, student.getClassId(), page, count);
+            }
+            else if(dataInfoDto.getKey() == 2){
+                list = examMapper.SelectPaginByStudent(date, student.getClassId(), page, count);
+            }
+            List<ExamInfoDto> examList = new ArrayList<>();
+            //对每个考试信息增加内容
+            for (Exam exam : list) {
+                ExamInfoDto value = new ExamInfoDto();
+                //判断该考试中是否包含自己所在的班级 ： false:不包含；true:包含
+                boolean flag = false;
+                value.setId(exam.getId());
+                value.setName(exam.getName());
+                value.setStartTime(exam.getStartTime());
+                value.setEndTime(exam.getEndTime());
+                value.setTotalScore(exam.getTotalScore());
+                value.setDifficulty(exam.getDifficulty());
+                value.setExamRange(exam.getExamRange());
+                value.setClassRange(exam.getClassRange());
+                //通过中英文；和空格进行分割 获取到班级的编号
+                String[] strings = exam.getClassRange().split(regexClass);
+                Integer[] classId = new Integer[strings.length];
+                StringBuilder className = new StringBuilder();
+                for (int i = 0; i < strings.length; i++) {
+                    classId[i] = UtilInteger.parseInt(strings[i]);
+                    //当包含自己所在班级时
+                    if(classId[i].equals(student.getClassId())){
+                        flag = true;
+                    }
+                    //获取该班级的名称并追加
+                    className.append(classMapper.selectByPrimaryKey(classId[i]).getName());
+                    className.append("；");
+                }
+                //当不包含自己所在班级的时候，不添加该考试
+                if(!flag){
+                    continue;
+                }
+                value.setClassIdRange(classId);
+                value.setClassNameRange(className.toString());
+                value.setCurriculumId(exam.getCurriculumId());
+                value.setCurriculumName(curriculumMapper.selectByPrimaryKey(exam.getCurriculumId()).getName());
+                examList.add(value);
+            }
+            map.put("list", examList);
+            map.put("total", examMapper.countByExample(examExample));
+            return map;
+        }
+        else {
             return null;
         }
     }
@@ -768,8 +851,10 @@ public class AssessManageImpl implements IAssessManageService {
      */
     public ResponseBean editExam(ExamInfoDto examInfoDto) {
         ResponseBean responseBean = new ResponseBean();
+        examInfoDto.setStartTime(examInfoDto.getExamTime().get(0));
+        examInfoDto.setEndTime(examInfoDto.getExamTime().get(1));
         try {
-            examMapper.updateByInfo(examInfoDto,examInfoDto.getId());
+            examMapper.updateByInfo(examInfoDto, examInfoDto.getId());
             responseBean.setMsg("修改成功");
             responseBean.setCode("200");
         } catch (Exception e) {
@@ -787,18 +872,115 @@ public class AssessManageImpl implements IAssessManageService {
      * @Date 19:29 2020/5/13
      * @param [dataInfoDto]
      * curriculumId:课程编号
-     * @return java.util.Map<java.lang.Integer,com.zx.sys.model.Class>
+     * @return java.util.Map<java.lang.Integer, com.zx.sys.model.Class>
      */
     public Map<Integer, Integer> questionCountByType(DataInfoDto dataInfoDto) {
         Integer curriculumId = dataInfoDto.getCurriculum();
-        Map<Integer,Integer> info = new HashMap<>();
+        Map<Integer, Integer> info = new HashMap<>();
         QuestionTypeExample questionTypeExample = new QuestionTypeExample();
         List<QuestionType> typeList = questionTypeMapper.selectByExample(questionTypeExample);
         //将每个题型遍历一遍
-        for(QuestionType type : typeList){
-            info.put(type.getId(),questionMapper.countByCurriculum(curriculumId,type.getId()));
+        for (QuestionType type : typeList) {
+            info.put(type.getId(), questionMapper.countByCurriculum(curriculumId, type.getId()));
         }
         return info;
     }
 
+    @Override
+    /**
+     * Description 增加试卷题目
+     * @Author ZX
+     * @Date 16:29 2020/5/17
+     * @param [examInfoDto]
+     * username 用户名
+     * option 用户身份
+     * difficulty 试卷难度
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean addPaper(ExamInfoDto examInfoDto) {
+        String username = examInfoDto.getUsername();
+        Integer option = examInfoDto.getOption();
+        Float difficulty = examInfoDto.getDifficulty();
+        ResponseBean responseBean = new ResponseBean();
+        Date date = new Date();
+        try {
+            if (option == 2) {
+                Teacher teacher = teacherMapper.selectByUserName(username);
+                //教师编号
+                Integer teacherId = teacher.getId();
+                //获取需要参加考试的学生
+                List<Integer> stuIdList = studentMapper.selectByClassList(examInfoDto.getClassIdRange());
+                for (ExamTypeInfoDto type : examInfoDto.getTypeList()) {
+                    //随机产生指定数量的题目
+                    List<Integer> idList = questionMapper.selectAllByType(date, teacherId,
+                            type.getTypeId(), difficulty, type.getCount());
+                    for (Integer stuId : stuIdList) {
+                        for (Integer quesId : idList) {
+                            AnswerPaper answerPaper = new AnswerPaper();
+                            answerPaper.setExamId(examInfoDto.getId());
+                            answerPaper.setQuestionId(quesId);
+                            answerPaper.setStuId(stuId);
+                            answerPaper.setScore(type.getScore());
+                            answerPaperMapper.insertSelective(answerPaper);
+                        }
+                    }
+                }
+                responseBean.setCode("200");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseBean.setCode("500");
+        }
+        return responseBean;
+    }
+
+    @Override
+    /**
+     * Description 加载试卷
+     * @Author ZX
+     * @Date 19:58 2020/5/18
+     * @param [examInfoDto]
+     * username 用户名
+     * option 用户身份
+     * examId 考试编号
+     * regexAnswer 分割答案的正则表达式
+     * list 试卷题目
+     * @return java.util.List<com.zx.sys.dto.PaperInfoDto>
+     */
+    public List<PaperInfoDto> paperInit(ExamInfoDto examInfoDto) {
+        String username = examInfoDto.getUsername();
+        Integer option = examInfoDto.getOption();
+        Integer examId = examInfoDto.getId();
+        String regexAnswer = ";|；|\\s+";
+        List<PaperInfoDto> list = new ArrayList<>();
+        if(option == 1){
+            Student student = studentMapper.selectByUserName(username);
+            List<AnswerPaper> paperList = answerPaperMapper.selectPaper(student.getId(),examId);
+            for(AnswerPaper paper : paperList){
+                PaperInfoDto info = new PaperInfoDto();
+                Question question = questionMapper.selectByPrimaryKey(paper.getQuestionId());
+                info.setScore(paper.getScore());
+                info.setStuId(student.getId());
+                info.setExamId(examId);
+                info.setExamName(examMapper.selectByPrimaryKey(examId).getName());
+                info.setName(student.getName());
+                info.setStartTime(examMapper.selectByPrimaryKey(examId).getStartTime());
+                info.setEndTime(examMapper.selectByPrimaryKey(examId).getEndTime());
+                info.setOptionA(question.getOptionA());
+                info.setOptionB(question.getOptionB());
+                info.setOptionC(question.getOptionC());
+                info.setOptionD(question.getOptionD());
+                info.setQuestionId(question.getId());
+                info.setStem(question.getStem());
+                info.setAnswer(question.getAnswer());
+                info.setAnswerList(Arrays.asList(info.getAnswer().split(regexAnswer)));
+                info.setTypeId(question.getTypeId());
+                info.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
+                list.add(info);
+            }
+            return list;
+        }
+        return null;
+    }
 }
+

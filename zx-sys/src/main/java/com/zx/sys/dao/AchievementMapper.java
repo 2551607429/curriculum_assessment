@@ -4,8 +4,10 @@ import com.zx.sys.model.Achievement;
 import com.zx.sys.model.AchievementExample;
 import com.zx.sys.model.AchievementKey;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface AchievementMapper {
     int countByExample(AchievementExample example);
 

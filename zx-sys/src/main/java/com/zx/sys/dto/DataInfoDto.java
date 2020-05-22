@@ -55,4 +55,10 @@ public class DataInfoDto {
      * classId:班级编号
      */
     private Integer[] classId;
+
+    /**
+     * 当前状态
+     */
+    private Integer key;
+
 }

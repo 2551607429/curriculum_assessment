@@ -114,7 +114,9 @@
       #{examRange,jdbcType=INTEGER}, #{classRange,jdbcType=VARCHAR}, #{curriculumId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zx.sys.model.Exam" >
+  <!--          设置插入之后生成插入后的id-->
+  <insert id="insertSelective" parameterType="com.zx.sys.model.Exam"
+          useGeneratedKeys="true" keyProperty="id">
     insert into exam
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -287,20 +289,43 @@
   </select>
 
   <select id="selectPaginByteach" resultMap="BaseResultMap">
+    select *
+    from exam e
+           join (
+      select distinct curriculum_id
+      from teaching
+      where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+        and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
+    ) c
+                on c.curriculum_id = e.curriculum_id
+    limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <select id="unSelectPaginByStudent" resultMap="BaseResultMap">
       select *
       from exam e
                join (
-          select id
-          from curriculum c
-                   join (
-              select distinct curriculum_id
-              from teaching
-              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
-                and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
-          ) t
-                        on t.curriculum_id = c.id
+          select distinct curriculum_id
+          from teaching
+          where teaching.class_id = #{classId,jdbcType=INTEGER}
+            and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
       ) c
-                    on c.id = e.curriculum_id
+                    on c.curriculum_id = e.curriculum_id
+      where #{date,jdbcType=TIMESTAMP} &lt;= e.end_time
+      limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <select id="SelectPaginByStudent" resultMap="BaseResultMap">
+      select *
+      from exam e
+               join (
+          select distinct curriculum_id
+          from teaching
+          where teaching.class_id = #{classId,jdbcType=INTEGER}
+            and #{date,jdbcType=TIMESTAMP} between teaching.start_time and teaching.end_time
+      ) c
+                    on c.curriculum_id = e.curriculum_id
+      where #{date,jdbcType=TIMESTAMP} &gt; e.end_time
       limit ${(page - 1) * count},${page * count}
   </select>
 

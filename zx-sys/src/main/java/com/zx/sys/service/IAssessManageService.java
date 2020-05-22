@@ -1,10 +1,7 @@
 package com.zx.sys.service;
 
 import com.zx.common.enums.ResponseBean;
-import com.zx.sys.dto.DataInfoDto;
-import com.zx.sys.dto.ExamInfoDto;
-import com.zx.sys.dto.LoginInputDto;
-import com.zx.sys.dto.QuestionInfoDto;
+import com.zx.sys.dto.*;
 import com.zx.sys.model.Chapter;
 import com.zx.sys.model.Class;
 import com.zx.sys.model.Curriculum;
@@ -259,5 +256,24 @@ public interface IAssessManageService {
      * @return
      */
     Map<Integer, Integer> questionCountByType(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 增加试卷题目
+     * @Author ZX
+     * @Date 16:28 2020/5/17
+     * @param examInfoDto
+     * @return
+     */
+    ResponseBean addPaper(ExamInfoDto examInfoDto);
+
+    /**
+     * Description 加载试卷
+     * @Author ZX
+     * @Date 19:58 2020/5/18
+     * @param examInfoDto
+     * @return
+     */
+    List<PaperInfoDto> paperInit(ExamInfoDto examInfoDto);
+
 
 }

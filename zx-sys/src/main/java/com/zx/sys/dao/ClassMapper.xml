@@ -216,8 +216,21 @@
            join (
       select distinct class_id
       from teaching
-      where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}) t
+      where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+        and (#{date,jdbcType=TIMESTAMP} BETWEEN teaching.start_time and teaching.end_time)) t
                 on t.class_id = c.id
+  </select>
+
+  <select id="selectByCurriculum" resultMap="BaseResultMap">
+      select *
+      from class c
+               join (
+          select distinct class_id
+          from teaching
+          where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+            and (#{date,jdbcType=TIMESTAMP} BETWEEN teaching.start_time and teaching.end_time)
+            and teaching.curriculum_id = #{curriculumId,jdbcType=INTEGER}) t
+                    on t.class_id = c.id
   </select>
 
 </mapper>

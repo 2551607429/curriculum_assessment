@@ -52,4 +52,10 @@ public class ExamInfoDto {
 
     private String curriculumName;
 
+    private List<ExamTypeInfoDto> typeList;
+
+    private Integer option;
+
+    private String username;
+
 }

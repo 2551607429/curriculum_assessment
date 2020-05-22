@@ -6,8 +6,9 @@ import com.zx.sys.model.CurriculumExample;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface CurriculumMapper {
     int countByExample(CurriculumExample example);
 

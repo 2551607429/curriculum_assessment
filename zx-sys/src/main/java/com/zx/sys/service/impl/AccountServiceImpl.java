@@ -99,7 +99,7 @@ public class AccountServiceImpl implements IAccountService {
             responseBean.setCode("500");
             responseBean.setMsg("用户名不存在！");
         }
-        else if(flag == 2){
+        else {
             responseBean.setCode("200");
             responseBean.setMsg("登录成功！");
         }

@@ -4,8 +4,11 @@ import com.zx.sys.model.AnswerPaper;
 import com.zx.sys.model.AnswerPaperExample;
 import com.zx.sys.model.AnswerPaperKey;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface AnswerPaperMapper {
     int countByExample(AnswerPaperExample example);
 
@@ -28,4 +31,18 @@ public interface AnswerPaperMapper {
     int updateByPrimaryKeySelective(AnswerPaper record);
 
     int updateByPrimaryKey(AnswerPaper record);
+
+
+
+
+//    自定义
+
+    /**
+     * 查询试卷
+     * @param stuId
+     * @param examId
+     * @return
+     */
+    List<AnswerPaper> selectPaper(@Param("stuId")Integer stuId,@Param("examId")Integer examId);
+
 }

@@ -3,9 +3,14 @@ package com.zx.sys.dao;
 import com.zx.sys.dto.UserInfoDto;
 import com.zx.sys.model.Student;
 import com.zx.sys.model.StudentExample;
+
+import java.util.Date;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface StudentMapper {
     int countByExample(StudentExample example);
 
@@ -68,4 +73,22 @@ public interface StudentMapper {
      * @return
      */
     List<Student> selectPagination(@Param("page")Integer page,@Param("count")Integer count);
+
+    /**
+     * 根据教师编号查询当前所教授班级
+     * @param teacherId 教师编号
+     * @param date 当前时间
+     * @param curriculumId 课程编号
+     * @return
+     */
+    List<Integer> selectByTeacher(@Param("teacherId")Integer teacherId,
+                              @Param("date") Date date,
+                              @Param("curriculumId")Integer curriculumId);
+
+    /**
+     * 根据班级编号查询学生
+     * @param classId
+     * @return
+     */
+    List<Integer> selectByClassList(@Param("array")Integer[] classId);
 }

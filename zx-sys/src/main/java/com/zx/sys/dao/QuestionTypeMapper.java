@@ -3,8 +3,11 @@ package com.zx.sys.dao;
 import com.zx.sys.model.QuestionType;
 import com.zx.sys.model.QuestionTypeExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface QuestionTypeMapper {
     int countByExample(QuestionTypeExample example);
 

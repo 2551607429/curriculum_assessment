@@ -306,4 +306,30 @@
     limit ${(page - 1) * count},${page * count}
   </select>
 
+  <select id="selectByTeacher" resultType="java.lang.Integer">
+      select s.id
+      from student s
+               join(
+          select c.id
+          from class c
+                   join (
+              select distinct class_id
+              from teaching
+              where teaching.teacher_id = #{teacherId,jdbcType=INTEGER}
+                and (#{date,jdbcType=TIMESTAMP} BETWEEN teaching.start_time and teaching.end_time)
+    and teaching.curriculum_id = #{curriculumId,jdbcType=INTEGER}) t
+                        on t.class_id = c.id
+      ) c
+                   on c.id = s.class_id
+  </select>
+  <select id="selectByClassList" resultType="java.lang.Integer">
+      select s.id
+    from student s
+    where class_id in
+    <foreach collection="array" item="item" index="index"
+             open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
 </mapper>

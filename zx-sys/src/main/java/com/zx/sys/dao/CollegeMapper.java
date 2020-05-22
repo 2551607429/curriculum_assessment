@@ -4,8 +4,9 @@ import com.zx.sys.model.College;
 import com.zx.sys.model.CollegeExample;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface CollegeMapper {
     int countByExample(CollegeExample example);
 
