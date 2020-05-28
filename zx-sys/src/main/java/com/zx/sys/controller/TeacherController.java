@@ -1,10 +1,7 @@
 package com.zx.sys.controller;
 
 import com.zx.common.enums.ResponseBean;
-import com.zx.sys.dto.DataInfoDto;
-import com.zx.sys.dto.ExamInfoDto;
-import com.zx.sys.dto.QuestionInfoDto;
-import com.zx.sys.dto.TeachingInfoDto;
+import com.zx.sys.dto.*;
 import com.zx.sys.model.Chapter;
 import com.zx.sys.model.Class;
 import com.zx.sys.model.Curriculum;
@@ -207,6 +204,43 @@ public class TeacherController {
      */
     public Map<Integer, Integer> questionCountByType(@RequestBody DataInfoDto dataInfoDto){
         return iAssessManageService.questionCountByType(dataInfoDto);
+    }
+
+    @PostMapping("/exam_student_init")
+    /**
+     * Description 分页获取学生考试列表信息
+     * @Author ZX
+     * @Date 10:37 2020/5/12
+     * @param [dataInfoDto]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public Map<String,Object> examStudentInit(@RequestBody DataInfoDto dataInfoDto){
+        return iAssessManageService.examStudentInit(dataInfoDto);
+    }
+
+
+    @PostMapping("/paper_init")
+    /**
+     * Description 加载试卷信息
+     * @Author ZX
+     * @Date 10:37 2020/5/12
+     * @param [examInfoDto]
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public List<PaperInfoDto> paperInit(@RequestBody ExamInfoDto examInfoDto){
+        return iAssessManageService.paperInit(examInfoDto);
+    }
+
+    @PostMapping("/submit_correct_paper")
+    /**
+     * Description 教师提交阅卷
+     * @Author ZX
+     * @Date 21:05 2020/5/26
+     * @param [list]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean submitCorrectPaper(@RequestBody List<PaperInfoDto> list){
+        return iAssessManageService.submitCorrectPaper(list);
     }
 
 }

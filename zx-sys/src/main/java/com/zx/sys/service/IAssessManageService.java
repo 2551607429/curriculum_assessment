@@ -6,6 +6,7 @@ import com.zx.sys.model.Chapter;
 import com.zx.sys.model.Class;
 import com.zx.sys.model.Curriculum;
 import com.zx.sys.model.QuestionType;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -276,4 +277,39 @@ public interface IAssessManageService {
     List<PaperInfoDto> paperInit(ExamInfoDto examInfoDto);
 
 
+    /**
+     * Description 学生提交试卷
+     * @Author ZX
+     * @Date 22:46 2020/5/22
+     * @param list 试题与答案
+     * @return
+     */
+    ResponseBean submitPaper(List<PaperInfoDto> list);
+
+    /**
+     * Description 自动批改试卷（客观题）
+     * @Author ZX
+     * @Date 22:46 2020/5/22
+     * @param paperInfoDto 试题与答案
+     * @return
+     */
+    Float autoCorrectPaper(PaperInfoDto paperInfoDto);
+
+    /**
+     * Description 分页获取学生考试列表信息
+     * @Author ZX
+     * @Date 20:32 2020/4/26
+     * @param dataInfoDto:加载数据信息
+     * @return
+     */
+    Map<String,Object> examStudentInit(DataInfoDto dataInfoDto);
+
+    /**
+     * Description 教师提交阅卷
+     * @Author ZX
+     * @Date 21:05 2020/5/26
+     * @param list 试题与评分结果
+     * @return
+     */
+    ResponseBean submitCorrectPaper(List<PaperInfoDto> list);
 }

@@ -54,6 +54,9 @@ public class AssessManageImpl implements IAssessManageService {
     @Autowired
     private KnowledgeMapper knowledgeMapper;
 
+    @Autowired
+    private AchievementMapper achievementMapper;
+
 
     @Override
     /**
@@ -830,6 +833,15 @@ public class AssessManageImpl implements IAssessManageService {
                 value.setClassNameRange(className.toString());
                 value.setCurriculumId(exam.getCurriculumId());
                 value.setCurriculumName(curriculumMapper.selectByPrimaryKey(exam.getCurriculumId()).getName());
+                if(dataInfoDto.getKey() == 2){
+                    AchievementKey key = new AchievementKey();
+                    key.setStudentId(student.getId());
+                    key.setExamId(exam.getId());
+                    Achievement achievement = achievementMapper.selectByPrimaryKey(key);
+                    if(achievement != null){
+                        value.setStuTotalScore(achievement.getScore());
+                    }
+                }
                 examList.add(value);
             }
             map.put("list", examList);
@@ -955,7 +967,8 @@ public class AssessManageImpl implements IAssessManageService {
         List<PaperInfoDto> list = new ArrayList<>();
         if(option == 1){
             Student student = studentMapper.selectByUserName(username);
-            List<AnswerPaper> paperList = answerPaperMapper.selectPaper(student.getId(),examId);
+            List<AnswerPaper> paperList = answerPaperMapper.selectPaperStu(student.getId(),examId);
+            //加载 试卷信息
             for(AnswerPaper paper : paperList){
                 PaperInfoDto info = new PaperInfoDto();
                 Question question = questionMapper.selectByPrimaryKey(paper.getQuestionId());
@@ -974,13 +987,342 @@ public class AssessManageImpl implements IAssessManageService {
                 info.setStem(question.getStem());
                 info.setAnswer(question.getAnswer());
                 info.setAnswerList(Arrays.asList(info.getAnswer().split(regexAnswer)));
+                info.setCheckList(Collections.singletonList(""));
                 info.setTypeId(question.getTypeId());
                 info.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
                 list.add(info);
             }
             return list;
         }
+        else if(option == 2){
+            Integer stuId = examInfoDto.getStuId();
+            Student student = studentMapper.selectByPrimaryKey(stuId);
+            List<AnswerPaper> paperList = answerPaperMapper.selectPaperStu(stuId,examId);
+            AchievementKey key = new AchievementKey();
+            key.setExamId(examId);
+            key.setStudentId(stuId);
+            Achievement achievement = achievementMapper.selectByPrimaryKey(key);
+            //加载试卷信息
+            for(AnswerPaper paper : paperList){
+                PaperInfoDto info = new PaperInfoDto();
+                Question question = questionMapper.selectByPrimaryKey(paper.getQuestionId());
+                info.setScore(paper.getScore());
+                info.setStuScore(paper.getStuScore());
+                info.setStuAnswer(paper.getStuAnswer());
+                if(paper.getStuAnswer() != null){
+                    if(question.getTypeId() == 2 || question.getTypeId() == 7){
+                        info.setCheckList(Arrays.asList(paper.getStuAnswer().split(regexAnswer)));
+                    }
+                    else if(question.getTypeId() == 5){
+                        char[] ch = paper.getStuAnswer().toCharArray();
+                        List<String> str = new ArrayList<>();
+                        for(char value : ch){
+                            str.add(String.valueOf(value));
+                        }
+                        info.setCheckList(str);
+                    }
+                    else{
+                        info.setStuAnswerList(Arrays.asList(paper.getStuAnswer().split(regexAnswer)));
+                    }
+                }
+                info.setStuId(stuId);
+                info.setStudentId(student.getStuId());
+                info.setClassName(classMapper.selectByPrimaryKey(student.getClassId()).getName());
+                info.setExamId(examId);
+                info.setExamName(examMapper.selectByPrimaryKey(examId).getName());
+                info.setTotalScore(examMapper.selectByPrimaryKey(examId).getTotalScore());
+                info.setName(student.getName());
+                info.setOptionA(question.getOptionA());
+                info.setOptionB(question.getOptionB());
+                info.setOptionC(question.getOptionC());
+                info.setOptionD(question.getOptionD());
+                info.setQuestionId(question.getId());
+                info.setStem(question.getStem());
+                info.setAnswer(question.getAnswer());
+                info.setAnswerList(Arrays.asList(info.getAnswer().split(regexAnswer)));
+                info.setTypeId(question.getTypeId());
+                info.setTypeName(questionTypeMapper.selectByPrimaryKey(question.getTypeId()).getName());
+                if(paper.getStuScore() != null){
+                    if(paper.getStuScore() == 0){
+                        info.setResult(0);
+                    }
+                    else{
+                        info.setResult(1);
+                    }
+                }
+                info.setStuTotalScore(achievement.getScore());
+                list.add(info);
+            }
+            return list;
+        }
         return null;
     }
+
+    @Override
+    /**
+     * Description 学生提交试卷
+     * @Author ZX
+     * @Date 22:48 2020/5/22
+     * @param [list]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean submitPaper(List<PaperInfoDto> list) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            Achievement achievement = new Achievement();
+            AchievementKey key = new AchievementKey();
+            achievement.setExamId(list.get(0).getExamId());
+            achievement.setStudentId(list.get(0).getStuId());
+            key.setStudentId(list.get(0).getStuId());
+            key.setExamId(list.get(0).getExamId());
+            float score = 0;
+            for(PaperInfoDto paper : list){
+                AnswerPaper answerPaper = new AnswerPaper();
+                answerPaper.setStuId(paper.getStuId());
+                answerPaper.setExamId(paper.getExamId());
+                answerPaper.setQuestionId(paper.getQuestionId());
+                //当为多选题时，答案在checkList中
+                if(paper.getTypeId() == 5){
+                    StringBuilder answer = new StringBuilder();
+                    for(String str : paper.getCheckList()){
+                        if(!"".equals(str)){
+                            answer.append(str);
+                        }
+                    }
+                    paper.setStuAnswer(answer.toString());
+                    answerPaper.setStuAnswer(answer.toString());
+                }
+                //当为填空题或者程序填空题时，答案在checkList中，对每个答案用;分割
+                else if(paper.getTypeId() == 2 || paper.getTypeId() == 7){
+                    StringBuilder answer = new StringBuilder();
+                    for(String str : paper.getCheckList()){
+                        answer.append(str);
+                        answer.append(";");
+                    }
+                    answerPaper.setStuAnswer(answer.toString());
+                }
+                else if(paper.getStuAnswer() != null){
+                    answerPaper.setStuAnswer(paper.getStuAnswer());
+                }
+                else{
+                    answerPaper.setStuAnswer("");
+                    answerPaper.setStuScore((float) 0);
+                }
+                if(!"".equals(answerPaper.getStuAnswer()) && answerPaper.getStuAnswer() != null){
+                    //当是客观题时：单选、多选、填空、判断 则调用自动批改试卷接口
+                    if(paper.getTypeId() == 1 || paper.getTypeId() == 2
+                            ||paper.getTypeId() == 3 || paper.getTypeId() == 5
+                            || paper.getTypeId() == 7){
+                        answerPaper.setStuScore(autoCorrectPaper(paper));
+                    }
+                    else{
+                        answerPaper.setStuScore((float) 0);
+                    }
+                }
+                else{
+                    answerPaper.setStuScore((float) 0);
+                }
+                score += answerPaper.getStuScore();
+                answerPaperMapper.updateByPrimaryKeySelective(answerPaper);
+            }
+            achievement.setScore(score);
+            if(achievementMapper.selectByPrimaryKey(key) != null){
+                achievementMapper.updateByPrimaryKey(achievement);
+            }
+            else{
+                achievementMapper.insert(achievement);
+            }
+            responseBean.setCode("200");
+            responseBean.setMsg("提交试卷成功！");
+        } catch (Exception e) {
+            responseBean.setCode("500");
+            responseBean.setMsg("提交试卷失败！");
+            e.printStackTrace();
+        }
+        return responseBean;
+    }
+    // 字符转换成数字，相当于hashCode
+    public static int[] getIntArray(String str) {
+        int[] arrRet = new int[str.length()];
+        int i = 0;
+        for (char ch : str.toUpperCase().toCharArray()) {
+            // 这本身没有必要-65，只不过想变成1234…更好理解
+            arrRet[i++] = ch - 65;
+        }
+        return arrRet;
+    }
+    // 求和，原来也可以在循环转化成数字的时候做的，分开只是为了更容易理解。
+    public static int sum(int[] arr) {
+        int sum = 0;
+        for (int i : arr) {
+            // 相等于求hashCode
+            sum += i * i * i + 100;
+        }
+        return sum;
+    }
+
+    @Override
+    /**
+     * Description 自动批改试卷（客观题）
+     * @Author ZX
+     * @Date 23:07 2020/5/22
+     * @param [paperInfoDto]
+     * @return java.lang.Float
+     */
+    public Float autoCorrectPaper(PaperInfoDto paperInfoDto) {
+        //当是选择题或者判断题时
+        if(paperInfoDto.getTypeId() == 1 || paperInfoDto.getTypeId() == 3){
+            String answer = paperInfoDto.getAnswer();
+            if(paperInfoDto.getStuAnswer().toUpperCase().equals(answer)){
+                return paperInfoDto.getScore();
+            }
+            else{
+                return (float) 0;
+            }
+        }
+        //当时多选题时
+        else if(paperInfoDto.getTypeId() == 5){
+            int ansSum = sum(getIntArray(paperInfoDto.getAnswer()));
+            int stuSum = sum(getIntArray(paperInfoDto.getStuAnswer()));
+            if(ansSum == stuSum){
+                return paperInfoDto.getScore();
+            }
+            else{
+                return (float) 0;
+            }
+        }
+        //当时填空题或者程序填空题时
+        else if(paperInfoDto.getTypeId() == 2 || paperInfoDto.getTypeId() == 7){
+            float sum = (float) 0;
+            for(int i = 0;i < paperInfoDto.getAnswerList().size();i++){
+                if(paperInfoDto.getAnswerList().get(i).equals(paperInfoDto.getCheckList().get(i))){
+                    //计算每个空的分数
+                    sum += paperInfoDto.getScore() / paperInfoDto.getAnswerList().size();
+                }
+            }
+            return sum;
+        }
+        else{
+            return (float) 0;
+        }
+    }
+
+    @Override
+    /**
+     * Description 分页获取学生考试列表信息
+     * @Author ZX
+     * @Date 15:43 2020/5/25
+     * @param [dataInfoDto]
+     * option:用户身份
+     * examId:考试编号
+     * page:页码
+     * count:每页数量
+     * regexAnswer 分割班级的正则表达式
+     * list:获取所选页面的学生成绩信息列表
+     * map:学生考试列表信息
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
+    public Map<String, Object> examStudentInit(DataInfoDto dataInfoDto) {
+        Integer option = dataInfoDto.getOption();
+        Integer examId = dataInfoDto.getKey();
+        Integer page = dataInfoDto.getPage();
+        Integer count = dataInfoDto.getCount();
+        String regexAnswer = ";|；|\\s+";
+        List<AchievementInfoDto> list = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        if (option == 2) {
+            Exam exam = examMapper.selectByPrimaryKey(examId);
+            String[] classRange = exam.getClassRange().split(regexAnswer);
+            Integer[] classId = new Integer[classRange.length];
+            Integer total = 0;
+            //获取考试总人数与班级编号列表
+            for(int i = 0;i < classRange.length;i++){
+                classId[i] = UtilInteger.parseInt(classRange[i]);
+                total += studentMapper.classCount(classId[i]);
+            }
+            //分页获取班级学生考试信息
+            List<Integer> stuList = studentMapper.selectByClassPagin(classId,page,count);
+            //配置成绩信息
+            for(Integer value : stuList){
+                AchievementInfoDto info = new AchievementInfoDto();
+                AchievementKey key = new AchievementKey();
+                key.setExamId(examId);
+                key.setStudentId(value);
+                Student student = studentMapper.selectByPrimaryKey(value);
+                info.setStudentId(value);
+                info.setExamId(examId);
+                info.setClassId(student.getClassId());
+                info.setClassName(classMapper.selectByPrimaryKey(student.getClassId()).getName());
+                if(achievementMapper.selectByPrimaryKey(key)!= null){
+                    info.setScore(achievementMapper.selectByPrimaryKey(key).getScore());
+                }
+                else{
+                    info.setScore((float) 0);
+                }
+                info.setName(student.getName());
+                info.setUsername(student.getUsername());
+                info.setExamName(examMapper.selectByPrimaryKey(examId).getName());
+                list.add(info);
+            }
+            //查询当前页面显示的课程列表
+            map.put("list", list);
+            map.put("total", total);
+            return map;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    /**
+     * Description 教师提交阅卷
+     * @Author ZX
+     * @Date 20:21 2020/5/26
+     * @param [list]
+     * achievement 成绩信息
+     * key 成绩主键
+     * score 该学生试卷总成绩
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean submitCorrectPaper(List<PaperInfoDto> list) {
+        ResponseBean responseBean = new ResponseBean();
+        try {
+            Achievement achievement = new Achievement();
+            AchievementKey key = new AchievementKey();
+            achievement.setExamId(list.get(0).getExamId());
+            achievement.setStudentId(list.get(0).getStuId());
+            key.setStudentId(list.get(0).getStuId());
+            key.setExamId(list.get(0).getExamId());
+            float score = 0;
+            for(PaperInfoDto paper : list){
+                AnswerPaper answerPaper = new AnswerPaper();
+                answerPaper.setStuId(paper.getStuId());
+                answerPaper.setExamId(paper.getExamId());
+                answerPaper.setQuestionId(paper.getQuestionId());
+                answerPaper.setStuAnswer(paper.getStuAnswer());
+                answerPaper.setScore(paper.getScore());
+                answerPaper.setStuScore(paper.getStuScore());
+                //将分数进行汇总
+                score += paper.getStuScore();
+                answerPaperMapper.updateByPrimaryKeySelective(answerPaper);
+            }
+            achievement.setScore(score);
+            if(achievementMapper.selectByPrimaryKey(key) != null){
+                achievementMapper.updateByPrimaryKey(achievement);
+            }
+            else{
+                achievementMapper.insert(achievement);
+            }
+            responseBean.setCode("200");
+            responseBean.setMsg("提交阅卷成功！");
+        } catch (Exception e) {
+            responseBean.setCode("500");
+            responseBean.setMsg("提交阅卷失败！");
+            e.printStackTrace();
+        }
+        return responseBean;
+    }
+
+
 }
 

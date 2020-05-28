@@ -322,6 +322,7 @@
       ) c
                    on c.id = s.class_id
   </select>
+
   <select id="selectByClassList" resultType="java.lang.Integer">
       select s.id
     from student s
@@ -330,6 +331,23 @@
              open="(" close=")" separator=",">
       #{item}
     </foreach>
+  </select>
+
+  <select id="selectByClassPagin" resultType="java.lang.Integer">
+    select s.id
+    from student s
+    where class_id in
+    <foreach collection="array" item="item" index="index"
+             open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    limit ${(page - 1) * count},${page * count}
+  </select>
+
+  <select id="classCount" resultType="java.lang.Integer">
+      select count(*)
+      from student
+      where class_id = #{class_id,jdbcType=INTEGER}
   </select>
 
 </mapper>

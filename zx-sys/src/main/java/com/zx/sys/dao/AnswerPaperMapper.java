@@ -38,11 +38,11 @@ public interface AnswerPaperMapper {
 //    自定义
 
     /**
-     * 查询试卷
+     * 学生查询试卷
      * @param stuId
      * @param examId
      * @return
      */
-    List<AnswerPaper> selectPaper(@Param("stuId")Integer stuId,@Param("examId")Integer examId);
+    List<AnswerPaper> selectPaperStu(@Param("stuId")Integer stuId,@Param("examId")Integer examId);
 
 }

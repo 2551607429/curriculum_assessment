@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 public class ExamInfoDto {
 
+    private Integer stuId;
+
     private Integer id;
 
     private String name;
@@ -28,6 +30,11 @@ public class ExamInfoDto {
      * 考试总分
      */
     private Integer totalScore;
+
+    /**
+     * 学生考试总分
+     */
+    private Float stuTotalScore;
 
     /**
      * 考试难度：0-5
@@ -57,5 +64,6 @@ public class ExamInfoDto {
     private Integer option;
 
     private String username;
+
 
 }

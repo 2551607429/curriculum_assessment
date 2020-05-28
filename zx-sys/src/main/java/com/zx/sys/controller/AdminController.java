@@ -8,6 +8,7 @@ import com.zx.sys.service.IAssessManageService;
 import com.zx.sys.service.ISystemManageService;
 import com.zx.sys.service.IUserManageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

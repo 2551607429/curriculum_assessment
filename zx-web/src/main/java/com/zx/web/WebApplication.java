@@ -3,6 +3,7 @@ package com.zx.web;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -12,8 +13,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @param
  * @return
  */
-@SpringBootApplication(scanBasePackages = {"com.zx"})
-@MapperScan({"com.zx.*.dao"})
+@SpringBootApplication(scanBasePackages = "com.zx.*")
+@MapperScan("com.zx.*.dao")
+@ComponentScan("com.zx.*")
 @EnableTransactionManagement
 public class WebApplication {
     public static void main(String[] args) {

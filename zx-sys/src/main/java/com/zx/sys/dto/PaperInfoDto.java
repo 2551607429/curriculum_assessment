@@ -53,11 +53,44 @@ public class PaperInfoDto {
 
     private String stuAnswer;
 
+    private List<String> stuAnswerList;
+
     private String answer;
 
     private List<String> answerList;
 
+    /**
+     * 多选题的学生答案
+     */
+    private List<String> checkList;
+
     private Float score;
 
     private Float stuScore;
+
+    /**
+     * 做题结果：0：错，1:对；
+     */
+    private Integer result;
+
+    /**
+     * 班级名称
+     */
+    private String className;
+
+    /**
+     * 学号
+     */
+    private String studentId;
+
+    /**
+     * 学生总得分
+     */
+    private Float stuTotalScore;
+
+    /**
+     * 试卷总分
+     */
+     private Integer totalScore;
+
 }

@@ -86,9 +86,27 @@ public interface StudentMapper {
                               @Param("curriculumId")Integer curriculumId);
 
     /**
-     * 根据班级编号查询学生
+     * 根据班级编号列表查询学生
      * @param classId
      * @return
      */
     List<Integer> selectByClassList(@Param("array")Integer[] classId);
+
+    /**
+     * 分页获取班级考试学生
+     * @param classId
+     * @param page
+     * @param count
+     * @return
+     */
+    List<Integer> selectByClassPagin(@Param("array")Integer[] classId,
+                                     @Param("page")Integer page,
+                                     @Param("count")Integer count);
+
+    /**
+     * 查询班级人数
+     * @param class_id 班级编号
+     * @return
+     */
+    Integer classCount(@Param("class_id")Integer class_id);
 }

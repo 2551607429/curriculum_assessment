@@ -7,6 +7,7 @@ import com.zx.sys.dto.PaperInfoDto;
 import com.zx.sys.service.IAssessManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class StudentController {
 
     @PostMapping("/paper_init")
     /**
-     * Description 分页获取考试列表数据
+     * Description 加载试卷信息
      * @Author ZX
      * @Date 10:37 2020/5/12
      * @param [examInfoDto]
@@ -52,5 +53,16 @@ public class StudentController {
         return iAssessManageService.paperInit(examInfoDto);
     }
 
+    @PostMapping("/submit_paper")
+    /**
+     * Description 学生提交试卷
+     * @Author ZX
+     * @Date 19:18 2020/5/23
+     * @param [list]
+     * @return com.zx.common.enums.ResponseBean
+     */
+    public ResponseBean submitPaper(@RequestBody List<PaperInfoDto> list){
+        return iAssessManageService.submitPaper(list);
+    }
 
 }
